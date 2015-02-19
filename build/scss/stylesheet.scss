@@ -1,0 +1,120 @@
+/* =======================================================
+	IMPORTS - BYO sass
+======================================================= */
+
+@import './partials/reset';
+@import './partials/fonts';
+@import './partials/colors';
+
+/* =======================================================
+	GLOBAL STYLES
+======================================================= */
+
+.global-content-container {
+	//comment this out if you're being responsi-ble. 
+	margin: 20px;
+	max-width: 1024px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+nav {
+	margin-bottom: 20px;
+	& a {
+		margin-right: 1.5rem;
+	}
+}
+
+a {
+	color: $mid-grey;
+	text-decoration: none;
+	cursor: pointer;
+	&:hover {
+		color: $bright-blue;
+		border-bottom: 2px solid $bright-blue;
+	}
+}
+
+p {
+	margin-top: 0.2rem;
+	font-size: 13px;
+	line-height: 1.2rem;
+	& pre {
+		font-size: inherit;
+	}
+}
+
+li {
+	font-size: 13px;
+	line-height: 1.2rem;
+	margin-left: 1.8rem;
+}
+
+pre {
+	// overflow: auto;x
+	// width: 500px;
+	font-family: monospace;
+	display: inline;
+	}
+.pre {
+	font-family: monospace;
+}
+
+hr {
+	margin:{
+		top: 10px;
+		bottom: 10px;
+	}
+}
+
+
+input {
+	padding: 5px;
+}
+
+.submitButton {
+	height: 30px;
+	padding: 5px;
+}
+
+
+footer {
+	margin-top: 40px;
+}
+
+/* =======================================================
+	BREAKPOINTS
+======================================================= */
+
+@media screen and (max-width: 1024px){
+	//styles for laptop/tablet landscape
+
+}
+
+@media screen and (max-width: 768px){
+	//styles for iPad/tablet portrait
+
+}
+
+@media screen and (max-width: 540px){
+	//styles for large phone
+
+}
+
+@media screen and (max-width: 480px){
+	//styles for medium phone
+
+}
+
+@media screen and (max-width: 320px){
+	//styles for small phone
+
+}
+
+@media screen and (max-width: 250px){
+	//styles for rediculously small phone
+
+}
+
+//=======================================================
+
