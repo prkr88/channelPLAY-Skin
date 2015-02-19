@@ -7,7 +7,7 @@ var bodyParser = require('body-parser');
 mongoose.connect('mongodb://localhost/skin');
 
 var skinSchema = new Schema({
-	 name: String
+	 data: Object
 }, { strict: false });
 
 module.exports = mongoose.model('Skin', skinSchema);

@@ -37,38 +37,50 @@ app.config(['$routeProvider', '$locationProvider',
 }]);
 
 //The main controller
-app.controller('main-controller', function($scope, $http, $timeout, $routeParams){
-
+app.controller('main-controller', function($scope, $http, $location, $timeout){
 	//request all skins and load them into
-	var getSkins = function(){
-		$http.get('/api/skin')
-			.success(function(data){
-				$scope.skins = data;
+	$http.get('/api/skin').success(function(data){
+			$scope.skins = data;
+		})
+		.error(function(status){
+			console.log('error with: '+ status);
+		});
+
+	//create a new skin, use schema
+	$scope.addSkin = function(){
+		$http.post('/api/skin', skin.data).success(function(data){
+			var skinID = data.id;
+			console.log("created: "+ skinID);
+			$location.path('/edit/'+ skinID);
+		})
+		.error(function(err){
+			console.log(err);
+		});
+	};
+
+	$scope.deleteSkin = function(id){
+			$http.delete('/api/skin/'+id).success(function(data){
+				console.log("Deleted Skin");
 			})
 			.error(function(status){
-				console.log('error with: '+status);
+				console.log("err deleting: "+status);
 			});
 		};
-
-		getSkins();
 
 });
 
 app.controller('edit-controller', function($scope, $routeParams, $http){
-	$scope.skin = skin;
-
 	//load the skin into scope using our API
 	var skin_req = $routeParams.id;
 	$scope.skinID = skin_req;
 
 	$http.get('/api/skin/'+skin_req).success(function(data){
-		$scope.skin = data;
+		$scope.skin = data.data;
 		console.log('loaded skin');
 	})
 	.error(function(err){
 		console.log(err);
 	});
-
 
 
 	$scope.addSkin = function(){
@@ -92,9 +104,11 @@ app.controller('edit-controller', function($scope, $routeParams, $http){
 
 
 
-		$scope.updateSkin = function(id){
-			$http.put('api/skin/'+id, newSkin).success(function(data){
-				console.log("updated skin");
+		$scope.updateSkin = function(){
+			var skin = $scope.skin;
+
+			$http.put('/api/skin/'+skin_req, skin).success(function(data){
+				console.log(data);
 			})
 			.error(function(status){
 				console.log("failed to update with: "+status);

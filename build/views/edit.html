@@ -1,6 +1,5 @@
 <p><a href="#/">Home</a> | <a ng-href="#/skin/{{skinID}}">view</a></p>
 <hr/>
-
 <form>
 	<input type="text" ng-model="skin.name" placeholder="Name">
 	<input type="text" ng-model="skin.client" placeholder="Client">
@@ -17,4 +16,5 @@
 
 </form>
 <br/>
-<input ng-click ="addSkin()" type="submit" value="Create" class="submitButton">
+<input ng-click ="updateSkin()" type="submit" value="Save" class="submitButton">
+

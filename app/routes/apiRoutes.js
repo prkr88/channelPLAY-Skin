@@ -6,25 +6,16 @@ var bodyParser = require('body-parser');
 //root
 router.get('/', function(req, res){
 	res.send("welcome to our API"); 
-		// {"GET All skins": "/skin"}, 
-		// {"POST new skin": "/skin"}, 
-		// {"GET a specific skin": "/skin/skin_id"},
-		// {"PUT a specific skin": "/skin/skin_id"},
-		// {"DELETE a specific skin": "/skin/skin_id"}');
 });
 
 //create new skin
 router.route('/skin')
 	.post(function(req, res){
 		var skin = new Skin({data: req.body});
-		// skin = req.body;
-		// skin.name = req.body.name;
-		// skin.url = req.body.url;
-		// skin.desc = req.body.desc; //save the whole thing for now, no validation
 		skin.save(function(err){
 			if (err)
 				res.send(err);
-			res.json({message: 'Created new skin!'});
+			res.json({id: skin._id});
 		});
 	})
 
@@ -50,23 +41,15 @@ router.route('/skin/:skin_id')
 	//update an object using it's ID
 	.put(function(req, res){
 		Skin.findById(req.params.skin_id, function(err, skin){
-			if(err)
-				res.send(err)
-
-			//only updates fields that have updated
-			if(req.body.name)
-				skin.name = req.body.name;
-			if(req.body.url)
-				skin.url = req.body.url;
-			if(req.desc)
-				skin.desc = req.body.desc;
+			skin.data = req.body;
 			skin.save(function(err){
 				if(err)
-					res.send(err)
-				res.json({message: 'Updated'});
-			});
-		});
-	})
+					console.log(err)
+				console.log('updated '+ skin._id);
+				res.json({id: skin._id});
+				})
+			})
+		})
 
 	//delete an object using it's ID
 	.delete(function(req, res) {
@@ -76,7 +59,8 @@ router.route('/skin/:skin_id')
             if (err)
                 res.send(err);
 
-            res.json({ message: 'Deleted' });
+            res.json({id: skin._id});
+            console.log('deleted '+skin._id);
         });
         console.log("deleted an object");
     });
