@@ -2,7 +2,6 @@ var express = require('express');
 var router = express.Router();
 var Skin = require('.././models/Skin');
 var bodyParser = require('body-parser');
-var router = express.Router();
 
 //root
 router.get('/', function(req, res){

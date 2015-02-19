@@ -1,5 +1,5 @@
 //Define angular app
-var app = angular.module('app', ['templatescache', 'ngRoute', 'ngAnimate', 'ngTouch', 'wu.masonry'])
+var app = angular.module('app', ['templatescache', 'ngRoute'])
 
 //configure application routes, 
 //note: this is using gulp-angular-template-cache so only template names are needed
@@ -107,4 +107,4 @@ app.controller('main-controller', function($scope, $http, $timeout, $routeParams
 
 app.controller('edit-controller', function($scope, $routeParams){
   $scope.routeId = $routeParams.id;
-})
+});
