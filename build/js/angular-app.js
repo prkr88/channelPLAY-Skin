@@ -12,14 +12,14 @@ app.config(['$routeProvider', '$locationProvider',
         controller: 'main-controller'
       })
 
-      .when('/view1', {
+      .when('/edit/:id', {
         templateUrl: 'view1.html',
-        controller: 'main-controller'
+        controller: 'edit-controller'
       })
 
-      .when('/view2', {
-        templateUrl: 'view2.html',
-        controller: 'main-controller'
+      .when('/edit', {
+        templateUrl: 'view1.html',
+        controller: 'edit-controller'
       })
 
       .when('/view3/:id', {
@@ -40,7 +40,7 @@ app.config(['$routeProvider', '$locationProvider',
 }]);
 
 //The main controller
-app.controller('main-controller', function($scope, $http, $timeout){
+app.controller('main-controller', function($scope, $http, $timeout, $routeParams){
 
   $scope.clearSkin = function(){
       $scope.skin_name = '';
@@ -102,8 +102,9 @@ app.controller('main-controller', function($scope, $http, $timeout){
     };
 
     getSkins();
+
 });
 
-app.controller('view3-controller', function($scope, $routeParams){
+app.controller('edit-controller', function($scope, $routeParams){
   $scope.routeId = $routeParams.id;
 })

@@ -1,21 +1,7 @@
 <h1> channelPLAY Skin App (home)</h1>
 <br/>
-<div ng-repeat="skin in skins"> 
-	<p>{{skin.name}} <a ng-click="editSkin(skin)">edit</a></p>
-	<p>{{skin.url}}</p>
-	<img ng-src="{{skin.url}}" width="200px">
-	<p></p>
-	<br/>
+<div class="skin-list" ng-repeat="skin in skins"> 
+	<p>{{skin.name}} <a href="#/edit/{{skin._id}}">edit</a></p>
+	<div class="example-image" ng-style="{'background-image':'url({{skin.url}})'}"></div>
+
 </div>
-
-<br/><hr/><br/><br/>
-
-<form>
-	<input value="id" ng-model="skin_id" type="text" placeholder="Skin ID">
-	<input value="Name" ng-model="skin_name" type="text" placeholder="Skin Name">
-	<input value="Url" ng-model="skin_url" type="text" placeholder="Skin URL">
-	<br/><br/>
-	<input ng-click ="addSkin()" type="submit" value="Add New" class="submitButton">
-	<input ng-click ="updateSkin(skin_id)" type="submit" value="Update" class="submitButton">
-	<input ng-click ="deleteSkin(skin_id)" type="submit" value="Delete" class="submitButton">
-</form>
