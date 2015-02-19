@@ -1,7 +1,8 @@
-<h1> channelPLAY Skin App (home)</h1>
-<br/>
-<div class="skin-list" ng-repeat="skin in skins"> 
-	<p>{{skin.name}} <a href="#/edit/{{skin._id}}">edit</a></p>
-	<div class="example-image" ng-style="{'background-image':'url({{skin.url}})'}"></div>
 
-</div>
+<h2>Select a Skin:</h2>
+<br/>
+<ul>
+<li ng-repeat="skin in skins"><a ng-href="#/skin/{{skin._id}}">{{skin.data.name}}</a></li>
+</ul>
+
+<p><a href="#/add">+ Add new skin</a>

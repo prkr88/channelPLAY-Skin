@@ -16,10 +16,11 @@ router.get('/', function(req, res){
 //create new skin
 router.route('/skin')
 	.post(function(req, res){
-		var skin = new Skin();
-		skin.name = req.body.name;
-		skin.url = req.body.url;
-		skin.desc = req.body.desc; //save the whole thing for now, no validation
+		var skin = new Skin({data: req.body});
+		// skin = req.body;
+		// skin.name = req.body.name;
+		// skin.url = req.body.url;
+		// skin.desc = req.body.desc; //save the whole thing for now, no validation
 		skin.save(function(err){
 			if (err)
 				res.send(err);

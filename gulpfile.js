@@ -34,7 +34,7 @@ gulp.task('assets', ['home'], function(){
 gulp.task('scripts', ['assets'], function(){
 	return streamqueue({ objectMode: true },
 		gulp.src('./build/js/angular-app.js'),
-		gulp.src('./build/js/data.js'),
+		gulp.src('./build/js/skin-schema.js'),
 		gulp.src('./build/js/temp/templateCache.js')
 		)
 		.pipe(gulp.dest('./public/src/js/'));

@@ -1,0 +1,20 @@
+<p><a href="#/">Home</a> | <a ng-href="#/skin/{{skinID}}">view</a></p>
+<hr/>
+
+<form>
+	<input type="text" ng-model="skin.name" placeholder="Name">
+	<input type="text" ng-model="skin.client" placeholder="Client">
+	<input type="text" ng-model="skin.description" placeholder="Description">
+	<hr/>
+	<p>Section 1</p>
+	<input type="text" ng-model="skin.section1.title" placeholder="Title">
+	<div ng-repeat="thumbnail in skin.section1.thumbnails">
+	Thumbnail: {{$index}}
+	<input ng-model="thumbnail.category" placeholder="Category">
+	<input ng-model="thumbnail.title" placeholder="Title">
+	<input ng-model="thumbnail.imageUrl" placeholder="Image Url">
+	</div>
+
+</form>
+<br/>
+<input ng-click ="addSkin()" type="submit" value="Create" class="submitButton">

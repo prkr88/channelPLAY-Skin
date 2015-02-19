@@ -8,8 +8,6 @@ mongoose.connect('mongodb://localhost/skin');
 
 var skinSchema = new Schema({
 	 name: String
-	,url: String
-	,desc: String
-});
+}, { strict: false });
 
 module.exports = mongoose.model('Skin', skinSchema);
