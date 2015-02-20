@@ -26,7 +26,7 @@ nav {
 }
 
 a {
-	color: $mid-grey;
+	color: $bright-blue;
 	text-decoration: none;
 	cursor: pointer;
 	&:hover {
@@ -99,11 +99,24 @@ input {
 }
 
 .hero-background{
+	padding-top: 30px;
 	display: block;
 	background:{
 		size: cover;
 		position: center;
 		color: #efefef;
+	}
+}
+
+.skin-navigation {
+	display: block;
+	height: 70px;
+	width: 1200px;
+	margin: auto;
+	background-color: rgba(255, 255, 255, 0.6);
+	& .nav-wrapper {
+		padding: 20px;
+		text-align: center;
 	}
 }
 
@@ -131,10 +144,30 @@ input {
 .hero-share {
 	margin:{
 		top: 10px;
-		bottom: 30px;
+		bottom: 20px;
 	}
 
 }
+
+.share-button {
+	display: inline-block;
+	vertical-align: top;
+	padding:{
+		top: 6px;
+		bottom: 7px;
+		left: 12px;
+		right: 12px;
+		}
+	background-color: #efefef;
+	border-radius: 4px;
+	margin-right: 8px;
+	&:hover{
+		background-color: #333 ;
+		color: #fff ;
+		// cursor: pointer;
+	}
+}
+
 .hero-copy {
 	padding: 30px;
 	& #hero-description {
@@ -169,6 +202,7 @@ button {
 
 .save {
 	float: right;
+
 }
 
 #edit-form {
@@ -186,7 +220,7 @@ button {
 		display: block;
 		padding: 5px;
 		width: 250px;
-		height: 60px;
+		height: 70px;
 		line-height: 1.4em;
 		// margin-bottom: 1.4rem;
 	}
@@ -214,6 +248,57 @@ button {
 	box-sizing: border-box;
 }
 
+.section1 {
+	width:1200px;
+	margin: auto;
+	& h1 {
+		margin-left: 20px;
+	}
+}
+
+.largeThumbnail {
+	display: inline-block;
+	vertical-align: top;
+	width: 360px;
+	height: 290px;
+	box-shadow: 0px 0px 6px #999;
+	margin: 20px;
+	// border: 1px solid black;
+}
+
+.largeThumbnailImage {
+	width: inherit;
+	height: 200px;
+	background:{
+		position: center;
+		size: cover;
+		color: #444;
+	}
+}
+
+.clock {
+	// position: absolute;
+	display: block;
+	text-align: center;
+	float: right;
+	margin-top: -35px;
+	margin-right: 5px;
+	width: 30px;
+	// height: 20px;
+	border-radius: 4px;
+	padding: {
+		left: 8px;
+		right: 8px;
+		top: 2px;
+		bottom: 2px;
+	}
+	background-color: #222;
+	color: #fff;
+}
+.largeThumbnailText {
+	padding: 10px;
+	text-align: left;
+}
 
 /* =======================================================
 	BREAKPOINTS

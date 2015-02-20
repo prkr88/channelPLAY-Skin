@@ -1,6 +1,15 @@
+<style type="text/css">
+	{{skin.style.fontImport}}
+</style>
+
 <div class="tools" ng-include=" 'tools.html' " ng-hide="previewMode"></div>
 
 <div class="hero-background" ng-style="{'background-image': 'url(' + skin.backgroundImage + ')'}" >
+
+<div class="skin-navigation">
+<div class="nav-wrapper">
+	Skin Navigation</div></div>
+
 <br/><br/><br/><br/>
 	<div class="hero-module">
 		<div class="hero-image" ng-style="{'background-image': 'url(' + skin.hero.imageUrl + ')'}"></div>
@@ -9,16 +18,53 @@
 			'color':skin.hero.style.title.color, 
 			'font-family': skin.hero.style.title.fontFamily,
 			'font-size' : skin.hero.style.title.fontSize,
-			'font-weight': skin.hero.style.title.fontWeight}">{{skin.hero.title}}</h1>
+			'font-weight': skin.hero.style.title.fontWeight,
+			'letter-spacing': skin.hero.style.title.letterSpacing,
+			'line-height': skin.hero.style.title.lineHeight}">{{skin.hero.title}}</h1>
 			<div class="hero-share" >
-				<img src="/src/assets/hero-share.png">
+				<!-- <img src="/src/assets/hero-share.png"> -->
+				<div class="share-button" ng-style="{
+				'background-color': skin.hero.style.buttonBackground.color,
+				'color': skin.hero.style.button.color,
+				'text-transform': skin.hero.style.buttonTextTransform}">
+				<p><i class="fa fa-paper-plane"></i> Share</p></div>
+				<div class="share-button" ng-style="{
+				'background-color': skin.hero.style.buttonBackground.color,
+				'color': skin.hero.style.button.color,
+				'text-transform': skin.hero.style.buttonTextTransform}">
+				<p><i class="fa fa-code"></i> Embed</p></div>
 			</div>
-			<p id="hero-description">{{skin.hero.description}}</p>
+			<p id="hero-description" ng-style="{
+			'color':skin.hero.style.description.color, 
+			'font-family': skin.hero.style.description.fontFamily,
+			'font-size' : skin.hero.style.description.fontSize,
+			'font-weight': skin.hero.style.description.fontWeight,
+			'letter-spacing': skin.hero.style.description.letterSpacing,
+			'line-height': skin.hero.style.description.lineHeight}">{{skin.hero.description}}</p>
 		</div>
 		</div>
 		<br/><br/><br/><br/>
 </div>
+<br/><br/>
+<div class="section1">
+<br/><br/>
+<h1>{{skin.section1.title}}</h1>
 
+	<div class="largeThumbnail" ng-repeat="thumbnail in skin.section1.thumbnails | limitTo: 6">
+		<div class="largeThumbnailImage" ng-style="{'background-image': 'url(' + thumbnail.imageUrl + ')'}">
+		</div>
+		<div class="clock"><p>2:41</p></div>
+		<div class="largeThumbnailText">
+			<h4>{{thumbnail.category}}</h4>
+			<p>{{thumbnail.title}}</p>
+		</div>
+	</div>
+
+</div>
+
+
+<br/><br/><br/><br/>
+<br/><br/><br/><br/><br/><br/>
 <br/><br/><br/><br/><br/><br/>
 
 <!-- <p>{{skin.section1.title}}</p>

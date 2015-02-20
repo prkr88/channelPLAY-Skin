@@ -122,7 +122,9 @@ app.controller('edit-controller', function($scope, $routeParams, $http, $locatio
 			});
 		};
 
-
+		$scope.cancelUpdate = function(){
+			$location.path('/skin/'+ skin_req);
+		};
 
 });
 

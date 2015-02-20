@@ -1,10 +1,14 @@
 <div class="content-container">
 
 <hr/>
-<div class="save"><button ng-click="cancelUpdate()">Cancel </button> <button ng-click ="updateSkin()">Save </button> </div>
+<div class="save">
+<button ng-click="cancelUpdate()">Cancel </button> <button ng-click ="updateSkin()">Save </button>
+</div>
+
 <form id="edit-form">
 	<h3>Skin Information</h3>
 	<br/>
+	<div class="fieldset">
 	<label for="name">Skin Name</label>
 	<input id="name" type="text" ng-model="skin.name" placeholder="Name">
 
@@ -13,12 +17,20 @@
 
 	<label for="skin-description">Skin Description</label>
 	<textarea id="skin-description"type="text" ng-model="skin.description" placeholder="Description"></textarea><br/>
-
+</div>
+<div class="fieldset">
 	<label for="bg-image">Background Image</label>
 	<input id="bg-image" type="text" ng-model="skin.backgroundImage" placeholder="background image URL">
+
+	<label for="bg-image">Import Google Fonts</label>
+	<input id="bg-image" type="text" ng-model="skin.style.fontImport" placeholder="@import(//googlefonturl)">
+</div>
+
+<hr/>
+<div class="save">
+	<button ng-click="cancelUpdate()">Cancel </button> <button ng-click ="updateSkin()">Save </button></div>
 	
-	<hr/>
-	<h3>Hero</h3>
+	<h3>Hero Module</h3>
 	<br/>
 
 <div class="fieldset copy">
@@ -29,63 +41,116 @@
 	<textarea type="text" ng-model="skin.hero.description" placeholder="Description"></textarea>
 	<br/>
 
+	<label>Video Thumbnail Image</label>
+	<input type="text" ng-model="skin.hero.imageUrl" placeholder="ImageUrl">
 	
 
-	<label>Video Image</label>
-	<input type="text" ng-model="skin.hero.imageUrl" placeholder="ImageUrl">
+
 	</div>
 
 <div class="fieldset">
-	<label>Title Font</label>
-	<input type="text" ng-model="skin.hero.style.title.fontFamily" placeholder="Font-Family">
+	<label>Title Font Family</label>
+	<input type="text" ng-model="skin.hero.style.title.fontFamily" placeholder="font-Family">
 
 	<label>Title Font Size</label>
-	<input type="text" ng-model="skin.hero.style.title.fontSize" placeholder="Font-size">
+	<input type="text" ng-model="skin.hero.style.title.fontSize" placeholder="font-size">
 
 	<label>Title Font Weight</label>
-	<input type="text" ng-model="skin.hero.style.title.fontWeight" placeholder="Font-weight">
+	<input type="text" ng-model="skin.hero.style.title.fontWeight" placeholder="font-weight">
 
 	<label>Title Font Color</label>
 	<input type="text" ng-model="skin.hero.style.title.color" placeholder="#444444">
 	<div class="colorStrip" ng-style="{'background-color': skin.hero.style.title.color}"></div>
+
+	<label>Title Letter Spacing</label>
+	<input type="text" ng-model="skin.hero.style.title.letterSpacing" placeholder="letter-spacing">
+
+	<label>Title Line Height</label>
+	<input type="text" ng-model="skin.hero.style.title.lineHeight" placeholder="line-height">
 </div>
 
 <div class="fieldset">
-	<label>Description Font</label>
-	<input type="text" ng-model="skin.hero.style.description.fontFamily" placeholder="Font-Family">
+	<label>Description Font Family</label>
+	<input type="text" ng-model="skin.hero.style.description.fontFamily" placeholder="font-Family">
 
 	<label>Description Font Size</label>
-	<input type="text" ng-model="skin.hero.style.description.fontSize" placeholder="Font-size">
+	<input type="text" ng-model="skin.hero.style.description.fontSize" placeholder="font-size">
 	
 
 	<label>Description Font Weight</label>
-	<input type="text" ng-model="skin.hero.style.description.fontWeight" placeholder="Font-weight">
+	<input type="text" ng-model="skin.hero.style.description.fontWeight" placeholder="font-weight">
 
 	<label>Description Font Color</label>
 	<input type="text" ng-model="skin.hero.style.description.color" placeholder="#999999">
 	<div class="colorStrip" ng-style="{'background-color': skin.hero.style.description.color}"></div>
-</div>
 
+	<label>Description Letter Spacing</label>
+	<input type="text" ng-model="skin.hero.style.Description.letterSpacing" placeholder="letter-spacing">
+
+	<label>Description Line Height</label>
+	<input type="text" ng-model="skin.hero.style.Description.lineHeight" placeholder="line-height">
+</div>
+<hr/>
+<div class="save">
+	<button ng-click="cancelUpdate()">Cancel </button> <button ng-click ="updateSkin()">Save </button></div>
+	
+	<h3>Buttons</h3>
+	<br/>
+
+<div class="fieldset">
+	<label>Share Button Text Transform</label><br/>
+	<select ng-model="skin.hero.style.buttonTextTransform">
+		<option value="none">None</option>
+		<option value="lowercase">lowercase</option>
+		<option value="uppercase">UPPERCASE</option>
+		<option value="Capitalize">Capitalise</option>
+	</select>
+	<br/><br/>
+
+
+	<label>Share Button Background Color</label>
+	<input type="text" ng-model="skin.hero.style.buttonBackground.color" placeholder="#444444">
+	<div class="colorStrip" ng-style="{'background-color': skin.hero.style.buttonBackground.color}"></div>
+
+	<label>Share Button Text Color</label>
+	<input type="text" ng-model="skin.hero.style.button.color" placeholder="#444444">
+	<div class="colorStrip" ng-style="{'background-color': skin.hero.style.button.color}"></div>
+</div>
 	<hr/>
 	<h3>Section 1</h3>
+<div class="fieldset">
 	<input type="text" ng-model="skin.section1.title" placeholder="Title">
-	<div ng-repeat="thumbnail in skin.section1.thumbnails">
+</div>
+	<hr/>
+	<h3>Section 1 Thumbs</h3>
+
+<div ng-repeat="thumbnail in skin.section1.thumbnails">
+	<div class="fieldset">
 	<p>Thumbnail: {{$index}}</p>
 	<input ng-model="thumbnail.category" placeholder="Category">
 	<input ng-model="thumbnail.title" placeholder="Title">
 	<input ng-model="thumbnail.imageUrl" placeholder="Image Url">
 	</div>
+</div>
+
+
 
 </form>
 <br/>
-<!-- <input ng-click ="updateSkin()" type="submit" value="Save" class="submitButton"> -->
-<button ng-click="cancelUpdate()">Cancel </button> <button ng-click ="updateSkin()">Save </button>
+
+
+<br/>
 <br/>
 <hr/>
 <br/>
-<p>To delete the template enter <strong>{{skin.name}}</strong> into the field:</p>
+
+<p>To delete the template enter &quot;<strong>{{skin.name}}</strong>&quot; into the field:</p>
 <input type="text" ng-model="deleteTest">
 <br/><br/>
 <button ng-if="deleteTest == skin.name" class="delete" ng-click="deleteSkin()">Delete</button>
+
+
+
+
 <br/><br/><br/><br/><br/>
 </div>
