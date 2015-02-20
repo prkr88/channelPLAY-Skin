@@ -30,7 +30,7 @@ app.config(['$routeProvider', '$locationProvider',
 			})
 
 			.otherwise({
-				redirectTo: '/#'
+				redirectTo: '/'
 			});
 
 		$locationProvider.html5Mode(false);
@@ -69,14 +69,19 @@ app.controller('main-controller', function($scope, $http, $location, $timeout){
 
 });
 
-app.controller('edit-controller', function($scope, $routeParams, $http){
+app.controller('edit-controller', function($scope, $routeParams, $http, $location){
 	//load the skin into scope using our API
 	var skin_req = $routeParams.id;
 	$scope.skinID = skin_req;
 
 	$http.get('/api/skin/'+skin_req).success(function(data){
-		$scope.skin = data.data;
-		console.log('loaded skin');
+		if(!data){
+			$location.path('/');
+		}
+		else{
+			$scope.skin = data.data;
+			console.log('loaded skin');
+		}
 	})
 	.error(function(err){
 		console.log(err);
@@ -96,6 +101,7 @@ app.controller('edit-controller', function($scope, $routeParams, $http){
 		$scope.deleteSkin = function(){
 			$http.delete('/api/skin/'+skin_req).success(function(data){
 				console.log("Deleted Skin");
+				$location.path('/');
 			})
 			.error(function(status){
 				console.log("err deleting: "+status);
@@ -109,6 +115,7 @@ app.controller('edit-controller', function($scope, $routeParams, $http){
 
 			$http.put('/api/skin/'+skin_req, skin).success(function(data){
 				console.log(data);
+				$location.path('/skin/'+ skin_req);
 			})
 			.error(function(status){
 				console.log("failed to update with: "+status);
@@ -120,7 +127,7 @@ app.controller('edit-controller', function($scope, $routeParams, $http){
 });
 
 
-app.controller('skin-controller', function($scope, $routeParams, $http){
+app.controller('skin-controller', function($scope, $routeParams, $http, $location){
 	var skin_req = $routeParams.id;
 	$scope.skinID = skin_req;
 
@@ -132,6 +139,14 @@ app.controller('skin-controller', function($scope, $routeParams, $http){
 	.error(function(err){
 		console.log(err);
 	});
+
+	$scope.editThis = function(){
+		$location.path('/edit/'+ skin_req);
+	};
+	// if($scope.skin.backgroundImage != null){
+	// 	console.log($scope.skin.backgroundImage);
+	// 	// document.getElementByTag(body).style({'background-image': $scope.skin.backgroundImage});
+	// };
 
 
 });

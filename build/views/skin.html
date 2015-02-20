@@ -1,15 +1,31 @@
-<h1>Skin Preview</h1>
-<p><a href="#/">Home</a> <a ng-href="#/edit/{{skinID}}">edit</a></p>
-<hr/>
+<div class="tools" ng-include=" 'tools.html' " ng-hide="previewMode"></div>
 
-<p>{{skin.title}}</p>
-<p>{{skin.client}}</p>
-<p>{{skin.description}}</p>
-<hr/>
-<p>{{skin.section1.title}}</p>
-<div ng-repeat="thumbnail in skin.section1.thumbnails">
+<div class="hero-background" ng-style="{'background-image': 'url(' + skin.backgroundImage + ')'}" >
+<br/><br/><br/><br/>
+	<div class="hero-module">
+		<div class="hero-image" ng-style="{'background-image': 'url(' + skin.hero.imageUrl + ')'}"></div>
+		<div class="hero-copy">
+			<h1 ng-style="{
+			'color':skin.hero.style.title.color, 
+			'font-family': skin.hero.style.title.fontFamily,
+			'font-size' : skin.hero.style.title.fontSize,
+			'font-weight': skin.hero.style.title.fontWeight}">{{skin.hero.title}}</h1>
+			<div class="hero-share" >
+				<img src="/src/assets/hero-share.png">
+			</div>
+			<p id="hero-description">{{skin.hero.description}}</p>
+		</div>
+		</div>
+		<br/><br/><br/><br/>
+</div>
+
+<br/><br/><br/><br/><br/><br/>
+
+<!-- <p>{{skin.section1.title}}</p>
+
+<div class="images" ng-repeat="thumbnail in skin.section1.thumbnails">
+	<img ng-src="{{thumbnail.imageUrl}}">
 	<p>{{thumbnail.title}}</p>
 	<p>{{thumbnail.category}}</p>
-	<img ng-src="{{thumbnail.imageUrl}}">
 	<br/>
-</div>
+</div> -->

@@ -3,9 +3,10 @@
 var skin = {
 	"data":{
 		"schemaVersion": "1.0",
-		"name": "Skin Name",
+		"name": "New Skin Name",
 		"client": "Client Name",
 		"description": "A short description",
+		"backgroundImage": null,
 		"headingStyles": {
 			"h1": "",
 			"h2": "",

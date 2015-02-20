@@ -1,13 +1,16 @@
-
+<div class="content-container">
 <h1>channelPLAY - Skin Generator </h1>
 <br><br>
 <h2>Select an existing skin:</h2>
 <br/>
 <ul>
-<li ng-repeat="skin in skins"><a ng-href="#/skin/{{skin._id}}">{{skin.data.name}}</a> <button ng-click ="deleteSkin(skin._id)">delete</button></li>
+<li ng-repeat="skin in skins"><a ng-href="#/skin/{{skin._id}}">{{skin.data.name}}</a></li>
 </ul>
 
 <br/>
 <hr/>
-<p><a ng-click="addSkin()">+ Add new skin</a>
+<button ng-click="addSkin()">+ Add new skin</button>
+<!-- <p><a ng-click="addSkin()">+ Add new skin</a> -->
 <!-- need to make this create a new skin and load it into the editor -->
+
+</p></div>

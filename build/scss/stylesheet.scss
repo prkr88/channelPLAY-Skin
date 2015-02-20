@@ -10,7 +10,7 @@
 	GLOBAL STYLES
 ======================================================= */
 
-.global-content-container {
+.content-container {
 	//comment this out if you're being responsi-ble. 
 	margin: 20px;
 	max-width: 1024px;
@@ -66,12 +66,9 @@ hr {
 		bottom: 10px;
 	}
 }
-
-
 input {
 	padding: 5px;
 }
-
 .submitButton {
 	height: 30px;
 	padding: 5px;
@@ -83,19 +80,140 @@ input {
 	margin: 20px;
 }
 
-.example-image {
+
+.tools {
 	display: block;
-	height: 200px;
-	width: 300px;
-	background-size: cover;
-	background-position: center;
+	min-width: 200px;
+	padding: 20px;
+	position: absolute;
+	margin: 20px;
+	background-color: #fff;
+	& a {
+		font-size: 13px;
+	}
 }
-.wrapper {
-	margin: 50px;
+
+
+.images {
+	display: inline-block;
 }
-footer {
-	margin-top: 40px;
+
+.hero-background{
+	display: block;
+	background:{
+		size: cover;
+		position: center;
+		color: #efefef;
+	}
 }
+
+.hero-module {
+	display: block;
+	margin: auto;
+	width: 970px;
+	// height: 500px;
+	background-color: #fff;
+	padding: 10px;
+	box-shadow: 0px 0px 6px #999;
+}
+
+.hero-image {
+	display: block;
+	background:{
+		size: cover;
+		position: center;
+		color: #efefef;
+	}
+	height: 546px;
+	width: 970px;
+}
+
+.hero-share {
+	margin:{
+		top: 10px;
+		bottom: 30px;
+	}
+
+}
+.hero-copy {
+	padding: 30px;
+	& #hero-description {
+		font-size: 18px;
+		line-height: 1.4em;
+	}
+}
+button {
+	font-size: 14px;
+	padding: 10px;
+	cursor: pointer;
+	border: none;
+	box-shadow: none;
+	background-color: #EFEFEF;
+	&:hover {
+		background-color: #48b8d0;
+		color: #fff;
+	}
+}
+.delete {
+	background-color: #555;
+	color: white;
+	letter-spacing: 0.2px;
+	border: none;
+	box-shadow: none;
+	&:hover{
+		background-color: #d93f3d;
+		cursor: pointer;
+	}
+}
+
+
+.save {
+	float: right;
+}
+
+#edit-form {
+	label {
+		font-size: 13px;
+	}
+	input {
+		display: block;
+		width: 250px;
+		padding: 5px;
+		margin-bottom: 14px;
+		margin-top: 2px;
+	}
+	textarea {
+		display: block;
+		padding: 5px;
+		width: 250px;
+		height: 60px;
+		line-height: 1.4em;
+		// margin-bottom: 1.4rem;
+	}
+	hr {
+		margin: {
+			top:20px;
+			bottom: 20px;
+		}
+	}
+}
+
+.fieldset {
+	display: inline-block;
+	vertical-align: top;
+	margin-right: 20px;
+}
+
+.colorStrip{
+	margin-top: -14px;
+	width: 100%;
+	display: block;
+	height: 8px;
+	margin-bottom: 4px;
+	border: 1px solid #f8f8f8;
+	box-sizing: border-box;
+}
+
 
 /* =======================================================
 	BREAKPOINTS
