@@ -1,7 +1,8 @@
 var skin = skin; //load in the schema
+var firebaseURL = "https://brilliant-heat-8775.firebaseio.com"
 
 //Define angular app
-var app = angular.module('app', ['templatescache', 'ngRoute'])
+var app = angular.module('app', ['templatescache', 'ngRoute', 'webfont-loader', 'firebase'])
 
 //configure application routes, 
 //note: this is using gulp-angular-template-cache so only template names are needed
@@ -29,11 +30,27 @@ app.config(['$routeProvider', '$locationProvider',
 				controller: 'skin-controller'
 			})
 
+			.when('/fonts', {
+				templateUrl: 'fonts.html',
+				controller: 'font-controller'
+			})
+
+			.when('/login', {
+				templateUrl: 'login.html',
+				controller: 'auth-controller'
+			})
+
 			.otherwise({
 				redirectTo: '/'
 			});
 
 		$locationProvider.html5Mode(false);
+}]);
+
+app.factory("Auth", ["$firebaseAuth", function($firebaseAuth) {
+  var ref = new Firebase(firebaseURL);
+  console.log("running factory");
+  return $firebaseAuth(ref);
 }]);
 
 //The main controller
@@ -112,7 +129,6 @@ app.controller('edit-controller', function($scope, $routeParams, $http, $locatio
 
 		$scope.updateSkin = function(){
 			var skin = $scope.skin;
-
 			$http.put('/api/skin/'+skin_req, skin).success(function(data){
 				console.log(data);
 				$location.path('/skin/'+ skin_req);
@@ -125,6 +141,17 @@ app.controller('edit-controller', function($scope, $routeParams, $http, $locatio
 		$scope.cancelUpdate = function(){
 			$location.path('/skin/'+ skin_req);
 		};
+
+		var googleApiKey = "AIzaSyAsXB9AaNxSIkEh9odUT39Jz35WmrCxwvs";
+		$http.get('https://www.googleapis.com/webfonts/v1/webfonts?key='+googleApiKey).success(function(data){
+			$scope.googleFonts = data;
+			console.log('Loaded google fonts API');
+		})
+		.error(function(err){
+			console.log(err);
+		});
+
+
 
 });
 
@@ -167,15 +194,80 @@ app.controller('add-controller', function($scope, $http){
 	};
 
 
+});
+
+
+app.controller('font-controller', function($scope, $http){
+	//get a list of google fonts
+	var googleApiKey = "AIzaSyAsXB9AaNxSIkEh9odUT39Jz35WmrCxwvs";
+	$http.get('https://www.googleapis.com/webfonts/v1/webfonts?key='+googleApiKey).success(function(data){
+		$scope.googleFonts = data;
+		console.log('Loaded google fonts API');
+	})
+	.error(function(err){
+		console.log(err);
+	});
+
+	$scope.loadedFontFamily = "Open Sans";
+	$scope.loadedFontVariant = "Black";
+
+	$scope.previewFont = function(font, variant){
+		$scope.loadedFontFamily = font.family;
+		$scope.loadedFontVariant = variant;
+	}
+
+	$scope.selectedTab = 'systemFonts';
+});
+
+
+
+app.controller('auth-controller', function($scope, $firebaseAuth, Auth){
+    var ref = new Firebase(firebaseURL);
+    var auth = $firebaseAuth(ref);
+
+    Auth.$onAuth(function(authData) {
+     $scope.authData = authData;
+	 });
+
+    $scope.login = function(email, password){
+	    ref.authWithPassword({
+		  email    : email,
+		  password : password
+		}, function(error, authData) {
+		  if (error) {
+		    console.log("Login Failed!", error);
+		  } else {
+		    console.log("Authenticated successfully");
+		  }
+		});
+	}
+
+	$scope.logout = function(){
+		ref.unauth();
+	};
+
+	$scope.createUser = function(email, password){
+		ref.createUser({
+			email    : email,
+		  	password : password
+		}, function(error, userData){
+			if(error){
+				console.log(error);
+				$scope.loginError = "There was an issue logging you in, please try again";
+			}
+			else {
+				console.log("Created new user "+ userData.uid);
+				$scope.login(email, password);
+			}
+		});
+	};
+
+
+
+
+
+
 })
-
-
-
-
-
-
-
-
 
 
 

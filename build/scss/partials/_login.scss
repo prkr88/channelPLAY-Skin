@@ -1,0 +1,28 @@
+.login-container {
+	width: 300px;
+	display: block;
+	margin: auto;
+	// border: 1px solid black;
+	margin-top: 5%;
+	text-align: center;
+}
+
+.login-form {
+	& input{
+		display: block;
+		width: 270px;
+		height: 25px;
+		padding: 10px;
+		margin-top: 10px;
+		margin-bottom: 10px;
+	}
+
+	& button {
+		padding:{
+			top: 10px;
+			bottom: 10px;
+			}
+		width: 300px;
+		margin-bottom: 10px;
+	}
+}

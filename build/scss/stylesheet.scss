@@ -5,6 +5,7 @@
 @import './partials/reset';
 @import './partials/fonts';
 @import './partials/colors';
+@import './partials/login';
 
 /* =======================================================
 	GLOBAL STYLES
@@ -211,7 +212,7 @@ button {
 	}
 	input {
 		display: block;
-		width: 250px;
+		width: inherit;
 		padding: 5px;
 		margin-bottom: 14px;
 		margin-top: 2px;
@@ -219,10 +220,13 @@ button {
 	textarea {
 		display: block;
 		padding: 5px;
-		width: 250px;
+		width: 280px;
 		height: 70px;
 		line-height: 1.4em;
 		// margin-bottom: 1.4rem;
+	}
+	select {
+		width: 300px;
 	}
 	hr {
 		margin: {
@@ -235,12 +239,14 @@ button {
 .fieldset {
 	display: inline-block;
 	vertical-align: top;
-	margin-right: 20px;
+	margin-right: 40px;
+	// padding: 20px;
+	width: 280px;
 }
 
 .colorStrip{
 	margin-top: -14px;
-	width: 100%;
+	width: 295px;
 	display: block;
 	height: 8px;
 	margin-bottom: 4px;
@@ -298,6 +304,13 @@ button {
 .largeThumbnailText {
 	padding: 10px;
 	text-align: left;
+}
+
+.font-picker {
+	width: 250px;
+	input {
+		width: inherit;
+	}
 }
 
 /* =======================================================

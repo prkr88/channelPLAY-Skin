@@ -1,0 +1,18 @@
+<div class="login-container">
+	<div  ng-if="!authData">
+		<h2>Log in to templatePLAY</h2>
+		<form class="login-form">
+		<div ng-if="loginError"><p>{{loginError}}</p></div>
+		<input type="email" ng-model="loginFormEmail" placeholder="Email Address">
+		<input type="password" ng-model="loginFormPassword" placeholder="Password">
+		<button ng-click="createUser(loginFormEmail, loginFormPassword)">Create New User</button>
+		<button ng-click="login(loginFormEmail, loginFormPassword)">Login</button>
+		</form>
+	</div>
+</div>
+
+<div ng-if="authData">
+<h1>Welcome</h1>
+
+<button ng-click="logout()">Logout</button>
+</div>

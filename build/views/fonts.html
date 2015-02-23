@@ -1,0 +1,62 @@
+<div class="content-container">
+
+<!-- 	<div class="font-picker">
+	<label for="search">Find a Google font</label><br/>
+	<input id="search" type="search" ng-model="searchText">
+	<br/>
+	<ul ng-if="searchText">
+		<li ng-repeat="font in googleFonts.items | filter: searchText | limitTo: 5">
+		<p webfont-loader="{{font.family}}" ng-style="{'font-family': '&quot;'+font.family+'&quot;'}">{{font.family}}<hr/></p></li>
+		
+	</ul>
+	</div> -->
+
+<div class="tab-nav">
+	<button ng-Click="selectedTab = 'systemFonts'">System Fonts </button> 
+	<button ng-Click="selectedTab = 'googleFonts'">Google Fonts</button> 
+	<button ng-Click="selectedTab = 'customFonts'">Custom Fonts</button></div>
+<br/>
+<br/>
+
+<div class="tab" ng-if="selectedTab == 'systemFonts' ">
+<h3>System Fonts</h3>
+<p>Use common web safe fonts pre-installed on user systems such as Arial, Verdana, and Georgia.</p>
+</div>
+
+<div class="tab" ng-if="selectedTab == 'googleFonts' ">
+<h3>Google Fonts</h3>
+<p>Find and import fonts from Google's font library.</p>
+
+</div>	
+
+
+<div class="tab" ng-if="selectedTab == 'customFonts' ">
+<h3>Custom Fonts</h3>
+<p>Specify a custom font by defining a font-family.</p>
+
+</div>	
+
+
+
+
+<!-- 			<br/>
+	<div class="fontPreview" webfont-loader="{{loadedFontFamily}}" >
+	<h1 ng-style="{'font-family': loadedFontFamily, 'font-weight': loadedFontVariant}">The quick brown fox jumped over the lazy dogs in {{loadedFontFamily}}.</h1>
+	<h2 ng-style="{'font-family': loadedFontFamily}">The quick brown fox jumped over the lazy dogs in {{loadedFontFamily}}.</h2>
+	<h3 ng-style="{'font-family': loadedFontFamily}">The quick brown fox jumped over the lazy dogs in {{loadedFontFamily}}.</h3>
+	<h4 ng-style="{'font-family': loadedFontFamily}">The quick brown fox jumped over the lazy dogs in {{loadedFontFamily}}.</h4>
+	<h5 ng-style="{'font-family': loadedFontFamily}">The quick brown fox jumped over the lazy dogs in {{loadedFontFamily}}.</h5>
+	<br/>
+	<p ng-style="{'font-family': loadedFontFamily}">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+	tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+	quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+	consequat. Duis aute irure dolor in <a href="">reprehenderit in voluptate</a> velit esse
+	cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+	proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+
+	</div>
+	<br/>
+	<hr/>
+	<br/> -->
+
+</div>
