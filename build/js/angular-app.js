@@ -4,35 +4,63 @@ var firebaseURL = "https://brilliant-heat-8775.firebaseio.com"
 //Define angular app
 var app = angular.module('app', ['templatescache', 'ngRoute', 'webfont-loader', 'firebase'])
 
+app.run(function($rootScope, $location){
+	$rootScope.$on("$routeChangeError", function(event, next, previous, error) {
+    // We can catch the error thrown when the $requireAuth promise is rejected
+    // and redirect the user back to the home page
+    if (error === "AUTH_REQUIRED") {
+      $location.path("/home");
+    }
+  });
+});
+
 //configure application routes, 
 //note: this is using gulp-angular-template-cache so only template names are needed
 app.config(['$routeProvider', '$locationProvider',
 	function($routeProvider, $locationProvider) {
 		$routeProvider
-
 			.when('/', {
-				templateUrl: 'home.html',
-				controller: 'main-controller'
+				redirectTo: '/login'
+			})
+
+			.when('/templates', {
+				templateUrl: 'templates.html',
+				controller: 'template-controller',
+				resolve: {
+			      "currentAuth": ["Auth", function(Auth) {
+			        return Auth.$requireAuth();
+			      }]
+				}
 			})
 
 			.when('/edit/:id', {
 				templateUrl: 'edit.html',
-				controller: 'edit-controller'
+				controller: 'edit-controller',
+				resolve: {
+			      "currentAuth": ["Auth", function(Auth) {
+			        return Auth.$requireAuth();
+			      }]
+				}
 			})
 
 			.when('/add', {
 				templateUrl: 'edit.html',
-				controller: 'add-controller'
+				controller: 'add-controller',
+				resolve: {
+			      "currentAuth": ["Auth", function(Auth) {
+			        return Auth.$requireAuth();
+			      }]
+				}
 			})
 
 			.when('/skin/:id', {
 				templateUrl: 'skin.html',
-				controller: 'skin-controller'
-			})
-
-			.when('/fonts', {
-				templateUrl: 'fonts.html',
-				controller: 'font-controller'
+				controller: 'skin-controller',
+				resolve: {
+			      "currentAuth": ["Auth", function(Auth) {
+			        return Auth.$requireAuth();
+			      }]
+				}
 			})
 
 			.when('/login', {
@@ -41,7 +69,7 @@ app.config(['$routeProvider', '$locationProvider',
 			})
 
 			.otherwise({
-				redirectTo: '/'
+				redirectTo: '/login'
 			});
 
 		$locationProvider.html5Mode(false);
@@ -49,7 +77,7 @@ app.config(['$routeProvider', '$locationProvider',
 
 app.factory("Auth", ["$firebaseAuth", function($firebaseAuth) {
   var ref = new Firebase(firebaseURL);
-  console.log("running factory");
+  // console.log("running factory");
   return $firebaseAuth(ref);
 }]);
 
@@ -160,7 +188,6 @@ app.controller('skin-controller', function($scope, $routeParams, $http, $locatio
 	var skin_req = $routeParams.id;
 	$scope.skinID = skin_req;
 
-
 	$http.get('/api/skin/'+skin_req).success(function(data){
 		$scope.skin = data.data;
 		console.log('loaded skin');
@@ -221,13 +248,18 @@ app.controller('font-controller', function($scope, $http){
 
 
 
-app.controller('auth-controller', function($scope, $firebaseAuth, Auth){
+app.controller('auth-controller', function($scope, Auth, $location, $timeout){
     var ref = new Firebase(firebaseURL);
-    var auth = $firebaseAuth(ref);
+    // var auth = $firebaseAuth(ref);
 
     Auth.$onAuth(function(authData) {
-     $scope.authData = authData;
-	 });
+	    $scope.authData = authData;
+    	if(authData){
+			$timeout(function(){
+				$location.path('templates')
+			}, 800)
+		}
+	});
 
     $scope.login = function(email, password){
 	    ref.authWithPassword({
@@ -235,16 +267,20 @@ app.controller('auth-controller', function($scope, $firebaseAuth, Auth){
 		  password : password
 		}, function(error, authData) {
 		  if (error) {
-		    console.log("Login Failed!", error);
+		  	$scope.loginError = error.message;
+		  	$scope.$apply();
+		    console.log("Login Failed!", error.message);
+
 		  } else {
+		  	$scope.loading = {'opacity': 0};
 		    console.log("Authenticated successfully");
+		    $timeout(function(){
+		    	$location.path('templates');
+		    },2000);
 		  }
 		});
 	}
 
-	$scope.logout = function(){
-		ref.unauth();
-	};
 
 	$scope.createUser = function(email, password){
 		ref.createUser({
@@ -252,8 +288,8 @@ app.controller('auth-controller', function($scope, $firebaseAuth, Auth){
 		  	password : password
 		}, function(error, userData){
 			if(error){
-				console.log(error);
-				$scope.loginError = "There was an issue logging you in, please try again";
+			  	$scope.loginError = error.message;
+			  	$scope.$apply();
 			}
 			else {
 				console.log("Created new user "+ userData.uid);
@@ -262,15 +298,29 @@ app.controller('auth-controller', function($scope, $firebaseAuth, Auth){
 		});
 	};
 
-
-
+	$scope.logout = function(){
+		ref.unauth();
+	};
 
 
 
 })
 
+app.controller('template-controller', function($scope, Auth, $firebaseAuth, $location){
+	var ref = new Firebase(firebaseURL);
+    var auth = $firebaseAuth(ref);
+   	
+   	$scope.logout = function(){
+		ref.unauth();
+		$location.path('/');
+	};
+
+    Auth.$onAuth(function(authData) {
+	    $scope.authData = authData;
+	});
 
 
+})
 
 
 

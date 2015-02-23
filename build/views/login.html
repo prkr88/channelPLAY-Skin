@@ -1,18 +1,25 @@
-<div class="login-container">
-	<div  ng-if="!authData">
-		<h2>Log in to templatePLAY</h2>
-		<form class="login-form">
-		<div ng-if="loginError"><p>{{loginError}}</p></div>
+<div class="login-background"></div>
+
+<div ng-if="!authData" class="login-container" id="loginContainer" ng-style="loading">
+	<div class="header"><h1>WELCOME</h1></div>
+	<div>
+		<form class="login-form" ng-submit="login(loginFormEmail, loginFormPassword)">
+		<div ng-if="loginError"><p class="error">{{loginError}}</p></div>
+
 		<input type="email" ng-model="loginFormEmail" placeholder="Email Address">
-		<input type="password" ng-model="loginFormPassword" placeholder="Password">
-		<button ng-click="createUser(loginFormEmail, loginFormPassword)">Create New User</button>
-		<button ng-click="login(loginFormEmail, loginFormPassword)">Login</button>
+		<input ng-change="loginButtons = {'opacity': 1};" type="password" ng-model="loginFormPassword" placeholder="Password">
+
+		<div>
+			<button ng-click="login(loginFormEmail, loginFormPassword)">LOGIN</button>
+			<p style="text-align:center"><a ng-click="createUser(loginFormEmail, loginFormPassword)">or create a new account</a>
+			</p>
+		</div>
+
 		</form>
 	</div>
 </div>
 
-<div ng-if="authData">
+<div ng-if="authData" class="login-container">
+<div class="header">
 <h1>Welcome</h1>
-
-<button ng-click="logout()">Logout</button>
-</div>
+<p>Loading your templates...</p></div>

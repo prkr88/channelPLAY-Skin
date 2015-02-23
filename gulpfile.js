@@ -101,5 +101,5 @@ gulp.task('serve', function () {
 });
 
 //default tasks
-gulp.task('default', ['build', 'bower', 'watch']);
+gulp.task('default', ['build', 'bower', 'watch', 'serve']);
 

@@ -1,0 +1,31 @@
+<nav class="templateNav">
+	<div class="logout">
+		<button ng-if="authData" ng-click="logout()">Logout</button>
+	</div>
+
+</nav>
+
+<div class="content">
+
+	<div class="content-container">
+		<div class="addNew">
+			<button ng-click="addSkin()">+ Create a new template</button>
+		</div>
+
+		<h1>Your Templates</h1> 
+		<hr/>
+		<br/>
+		<ul>
+		<li ng-repeat="skin in skins"><a ng-href="#/skin/{{skin._id}}">{{skin.data.name}} - {{skin.data.client}}</a></li>
+		</ul>
+
+		<br/>
+		<br/>
+		
+		<!-- <p><a ng-click="addSkin()">+ Add new skin</a> -->
+		<!-- need to make this create a new skin and load it into the editor -->
+
+		</p>
+	</div>
+	</div>
+</div>
