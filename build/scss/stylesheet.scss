@@ -7,6 +7,7 @@
 @import './partials/colors';
 @import './partials/login';
 @import './partials/templates';
+@import './partials/forms';
 
 /* =======================================================
 	GLOBAL STYLES
@@ -14,10 +15,11 @@
 
 .content-container {
 	//comment this out if you're being responsi-ble. 
-	margin: 20px;
-	max-width: 1024px;
+	// margin: 20px;
+	max-width: 960px;
 	margin-left: auto;
 	margin-right: auto;
+	transition: width 1s;
 }
 
 nav {
@@ -318,9 +320,13 @@ button {
 	BREAKPOINTS
 ======================================================= */
 
-@media screen and (max-width: 1024px){
+@media screen and (max-width: 960px){
 	//styles for laptop/tablet landscape
-
+	.content-container {
+		width: 90%;
+		margin: auto;
+		transform: width 1s;
+	}
 }
 
 @media screen and (max-width: 768px){

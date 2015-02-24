@@ -22,6 +22,11 @@ app.config(['$routeProvider', '$locationProvider',
 			.when('/', {
 				redirectTo: '/login'
 			})
+			
+			.when('/login', {
+				templateUrl: 'login.html',
+				controller: 'auth-controller'
+			})
 
 			.when('/templates', {
 				templateUrl: 'templates.html',
@@ -33,9 +38,19 @@ app.config(['$routeProvider', '$locationProvider',
 				}
 			})
 
-			.when('/login', {
-				templateUrl: 'login.html',
-				controller: 'auth-controller'
+			.when('/template/:uid/:id', {
+				templateUrl: 'template.html',
+				controller: 'view-controller',
+			})
+
+			.when('/edit/:id', {
+				templateUrl: 'edit-template.html',
+				controller: 'edit-controller',
+				resolve: {
+			      "currentAuth": ["Auth", function(Auth) {
+			        return Auth.$requireAuth();
+			      }]
+				}
 			})
 
 			.otherwise({
@@ -51,9 +66,7 @@ app.factory("Auth", ["$firebaseAuth", function($firebaseAuth) {
   return $firebaseAuth(ref);
 }]);
 
-
 //FIREBASE APP CONTROLLERS
-
 app.controller('auth-controller', function($scope, Auth, $location, $timeout){
     Auth.$onAuth(function(authData) {
 	    $scope.authData = authData;
@@ -67,7 +80,6 @@ app.controller('auth-controller', function($scope, Auth, $location, $timeout){
     $scope.login = function(email, password){
     	var ref = new Firebase(firebaseURL);
     	$scope.authenticating = true;
-
 	    ref.authWithPassword({
 		  email    : email,
 		  password : password
@@ -89,11 +101,14 @@ app.controller('auth-controller', function($scope, Auth, $location, $timeout){
 
 
 	$scope.createUser = function(email, password){
+		var ref = new Firebase(firebaseURL);
+		$scope.authenticating = true;
 		ref.createUser({
 			email    : email,
 		  	password : password
 		}, function(error, userData){
 			if(error){
+				$scope.authenticating = false;
 			  	$scope.loginError = error.message;
 			  	$scope.$apply();
 			}
@@ -108,18 +123,16 @@ app.controller('auth-controller', function($scope, Auth, $location, $timeout){
 		Auth.$unauth();
 	};
 
-
-
 })
 
-app.controller('templates-controller', function($scope, Auth, $firebase, $firebaseAuth, $location, $timeout){
-	$scope.loading = true;
+app.controller('templates-controller', function($scope, Auth, $firebase, $location, $timeout){
 
     Auth.$onAuth(function(authData) {
 	    $scope.authData = authData;
 	    // console.log($scope.authData);
 	    if(authData){
 	    	syncFirebase(authData.uid);
+	    	defineSchema();
 	    } 
 	});
 
@@ -128,11 +141,25 @@ app.controller('templates-controller', function($scope, Auth, $firebase, $fireba
     	var sync = $firebase(ref);
     	var templatesArray = sync.$asArray();
     	$scope.templates = templatesArray;
-    	if($scope.templates.length === 0){
-    		$scope.noTemplates = true;
-    	}
-    }
+    	$timeout(function(){
+    		if($scope.templates.length === 0){
+    			$scope.noTemplates = true;
+    		}
+    	}, 1000);
+    };
 
+    var defineSchema = function(){
+    	//define creation schema here
+		$scope.template = {
+			author : $scope.authData.uid,
+			name : "Placeholder Name",
+			client : "Placeholder Client",
+			description: "Edit the template to setup a description, and customise the content.",
+			hero : {
+				imageUrl : "http://walterlow.com/wp/wp-content/uploads/2013/12/Island.jpg"
+			}
+		};
+    }
 
    	$scope.logout = function(){
 		Auth.$unauth();
@@ -141,13 +168,14 @@ app.controller('templates-controller', function($scope, Auth, $firebase, $fireba
 		}, 300);
 	};
 
-
-    $scope.newEntry = function(word){
-	    templates.$push({hello: word}).then(function(newChildRef) {
-  			console.log("added record with id " + newChildRef.key());
-  		})
+	$scope.createNewTemplate = function(){
+		$scope.creatingTemplate = true;
+		$scope.templates.$add($scope.template).then(function(newChildRef){
+			$timeout(function(){
+				$location.path('/edit/'+newChildRef.key());
+			}, 1200);
+		});
 	}
-
 
 	//helper functions
 	$scope.addNew = function(){
@@ -158,11 +186,44 @@ app.controller('templates-controller', function($scope, Auth, $firebase, $fireba
 		$scope.template = '';
 	};
 
+	$scope.deleteTemplate = function(index){
+		if (confirm('Are you sure? This template will not be recoverable.')) {
+		    $scope.templates.$remove(index);
+		} else {
+		    // Do nothing!
+		}
+	};
+})
+
+app.controller('edit-controller', function($scope, $firebase, Auth, $routeParams, $location){
+	Auth.$onAuth(function(authData) {
+	    $scope.authData = authData;
+	    if(authData){
+	    	loadTemplate(authData.uid);
+	    	// $scope.template.author = $scope.authData.uid;
+	    }
+	});
+
+	var loadTemplate = function(uid){
+		var id = $routeParams.id;
+		var ref = new Firebase(firebaseURL).child('users/'+uid+'/templates/'+id);
+		var sync = $firebase(ref);
+		var template = sync.$asObject();
+		template.$bindTo($scope, 'template');
+	};
+})
+
+app.controller('view-controller', function($scope, $firebase, $routeParams){
+	var id = $routeParams.id;
+	var uid = $routeParams.uid;
+
+	var ref = new Firebase(firebaseURL).child('users/'+uid+'/templates/'+id);
+	var sync = $firebase(ref);
+	var template = sync.$asObject();
+	template.$bindTo($scope, 'template');
 
 
 })
-
-
 
 
 

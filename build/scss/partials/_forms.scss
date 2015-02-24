@@ -1,0 +1,36 @@
+$form-width: 300px;
+$form-padding: 8px;
+
+.edit-template-form {
+	label {
+		display: block;
+		font-size: 13px;
+		margin-bottom: ($form-padding/2);
+	}
+
+	input {
+		display: block;
+		padding: $form-padding;
+		margin-bottom: ($form-padding*2);
+		width: $form-width;
+    	&:focus {
+    		outline:none;
+    	}
+	}
+
+	textarea {
+		display: block;
+		margin-bottom: ($form-padding*2);
+		width: $form-width;
+		padding: $form-padding;
+		height: auto;
+    	&:focus {
+    		outline:none;
+    	}
+	}
+
+	fieldset {
+		border: none;
+	}
+
+}

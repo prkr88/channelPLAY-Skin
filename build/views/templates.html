@@ -1,36 +1,48 @@
 <nav class="templateNav">
+<div class="content-container">
 <ul>
 	<li><a ng-click="logout()">Logout</a></li>
 	<li> | </li>
 	<li>{{authData.password.email}}</li>
 	</ul>
+</div>
 </nav>
 
-<div class="content">
 
 <div class="content-container">
 	<div class="addNew">
-		<button ng-click="createNewTemplate()">+ Create a new template</button>
+		<button ng-click="createNewTemplate()">
+		<span ng-if="!creatingTemplate">+ Create a new template</span>
+		<span ng-if="creatingTemplate">Creating new template...</span>
+		</button>
 	</div>
 	<h1>YOUR TEMPLATES</h1> 
 	<hr/>
 	<div class="list-container">
-		<p
+		<p ng-if="noTemplates">Looks like you don't have any templates yet! Click 'Create a new template' to get started.</p>
 		<div class="template-tile" ng-repeat="template in templates">
-		{{template.name}} <a ng-click="templates.$remove($index)">delete</a>
-
+			<div class="template-image" ng-style="{'background-image':'url({{template.hero.imageUrl}})'}"></div>
+			<div class="template-info">
+				<h3>{{template.name}}</h3>
+				<p class="template-client">{{template.client}}</p>
+				<br/>
+				<p class="template-client">{{template.description}}</p>
+				<br/>
+				<p><a ng-href="template/{{authData.uid}}/{{template.$id}}" target="_blank">View</a> / 
+				<a ng-href="edit/{{template.$id}}">Edit</a> / 
+				<a ng-click="deleteTemplate($index)">Delete</a></p>
+			</div>
 		</div>
 	</div>
 </div>
 
-
-<div class="helper-tools">
+<div ng-if="helperMode" class="helper-tools">
 	<hr/>
 	<p>HELPER TOOLS - not for production</p>
 	<form>
-	<input type="text" ng-model="template.name"> 
+	<input type="text" ng-model="template.name" placeholder="name"> 
+	<input type="text" ng-model="template.client" placeholder="client"> 
 	<button ng-click="addNew()">Add</button>
 	</form>
 </div>
 
-</div>

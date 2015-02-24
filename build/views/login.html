@@ -6,16 +6,21 @@
 	</div>
 
 	<div>
-		<form ng-style="authStyle" class="login-form" ng-submit="login(loginFormEmail, loginFormPassword)">
-		<div ng-if="loginError"class="error"><p>{{loginError}}</p></div>
+		<form ng-style="authStyle" class="login-form">
+		<div ng-if="loginError" class="error"><p>{{loginError}}</p></div>
 		<input type="email" ng-model="loginFormEmail" placeholder="Email Address">
 		<input type="password" ng-model="loginFormPassword" placeholder="Password">
-		<button  ng-click="login(loginFormEmail, loginFormPassword)">
+		
+		<button  ng-if="!createNewUser" ng-click="login(loginFormEmail, loginFormPassword)">
 		<span ng-if="!authenticating">LOGIN</span>
-		<span ng-if="authenticating">logging In...</span>
+		<span ng-if="authenticating">Logging In...</span>
 		</button>
-		<p style="text-align:center"><a ng-click="createUser(loginFormEmail, loginFormPassword)">or create as a new account</a>
-		</p>
+		<button ng-if="createNewUser" ng-click="createUser(loginFormEmail, loginFormPassword)">
+		<span ng-if="!authenticating">CREATE NEW ACCOUNT</span>
+		<span ng-if="authenticating">Logging In...</span>
+		</button>
+		<p ng-hide="createNewUser" style="text-align:center"><a ng-click="createNewUser = true">or create a new account</a></p>
+		<p ng-show="createNewUser" style="text-align:center"><a ng-click="createNewUser = false">or log in with existing account</a></p>
 		</form>
 	</div>
 </div>

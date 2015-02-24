@@ -1,0 +1,28 @@
+<div class="content-container">
+	<br/><br/>
+	<div>
+	<form class="edit-template-form">
+		<h2>Edit Template</h2>
+		<p>NOTE: All changes apply live, there's no need to save and there's no undo. Currently under development, some fields may not work or be visible.</p>
+		<br/><hr/><br/>
+
+		<fieldset>
+		<h3>Global Properties</h3>
+		<br/>
+		<label>Name</label>
+		<input type="text" ng-model="template.name" placeholder="imageUrl">
+		
+		<label>Client</label>
+		<input type="text" ng-model="template.client" placeholder="imageUrl">
+
+		<label>Description</label>
+		<textarea type="text" ng-model="template.description" placeholder="description"></textarea>
+
+		<label>Hero Image</label>
+		<input type="text" ng-model="template.hero.imageUrl" placeholder="imageUrl">
+		</fieldset>
+
+		<a href="templates"><button>Finished</button></a>
+	</form>
+	</div>
+</div>
