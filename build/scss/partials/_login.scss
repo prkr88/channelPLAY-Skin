@@ -3,23 +3,33 @@
 	height: 100%;
 	width: 100%;
 	background-image: url('/src/assets/low_poly_background.jpg');
+	background-position: center;
    -webkit-background-size: cover;
 	  -moz-background-size: cover;
 	    -o-background-size: cover;
 	       background-size: cover;
+	// background-color: #222;
 }
 
 .login-container {
 	width: 300px;
-	height: 300px;
 	display: block;
 	margin: auto;
-	transform: translateY(45%);
-	-webkit-transform: translateY(50%);
+	transform: translateY(50%);
+	margin-top: 40px;
+	@media screen and (orientation: portrait){
+		transform: translateY(30%);
+		margin-top: 100px;
+	}
 	text-align: center;
 	letter-spacing: 0.4px;
-	padding: 40px;
-	transition: all 0.3s;
+	// padding: 40px;
+	 -webkit-transition: all 0.3;
+		-moz-transition: all 0.3;
+		 -ms-transition: all 0.3;
+		  -o-transition: all 0.3;
+		    transition: all 0.3s;
+
 	-webkit-animation: fadein 1.8s; /* Safari, Chrome and Opera > 12.1 */
        -moz-animation: fadein 1.8s; /* Firefox < 16 */
         -ms-animation: fadein 1.8s; /* Internet Explorer */
@@ -27,9 +37,7 @@
             animation: fadein 1.8s;
 }
 
-.login-form{
-	transition: all 0.3s;
-}
+
 
 @keyframes fadein {
     from { opacity: 0; }
@@ -56,6 +64,15 @@
     from { opacity: 0; }
     to   { opacity: 1; }
 }
+
+.login-form{
+	 -webkit-transition: all 0.3;
+		-moz-transition: all 0.3;
+		 -ms-transition: all 0.3;
+		  -o-transition: all 0.3;
+		    transition: all 0.3s;
+}
+
 
 .header {
 	color: #fff;
@@ -97,6 +114,7 @@
 		color: #fff;
     	border: none;
     	font-size: 15px;
+    	border-radius: none;
     	&:focus {
     		outline:none;
     	}
