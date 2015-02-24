@@ -1,31 +1,36 @@
 <nav class="templateNav">
-	<div class="logout">
-		<button ng-if="authData" ng-click="logout()">Logout</button>
-	</div>
-
+<ul>
+	<li><a ng-click="logout()">Logout</a></li>
+	<li> | </li>
+	<li>{{authData.password.email}}</li>
+	</ul>
 </nav>
 
 <div class="content">
 
-	<div class="content-container">
-		<div class="addNew">
-			<button ng-click="addSkin()">+ Create a new template</button>
+<div class="content-container">
+	<div class="addNew">
+		<button ng-click="createNewTemplate()">+ Create a new template</button>
+	</div>
+	<h1>YOUR TEMPLATES</h1> 
+	<hr/>
+	<div class="list-container">
+		<p
+		<div class="template-tile" ng-repeat="template in templates">
+		{{template.name}} <a ng-click="templates.$remove($index)">delete</a>
+
 		</div>
-
-		<h1>Your Templates</h1> 
-		<hr/>
-		<br/>
-		<ul>
-		<li ng-repeat="skin in skins"><a ng-href="#/skin/{{skin._id}}">{{skin.data.name}} - {{skin.data.client}}</a></li>
-		</ul>
-
-		<br/>
-		<br/>
-		
-		<!-- <p><a ng-click="addSkin()">+ Add new skin</a> -->
-		<!-- need to make this create a new skin and load it into the editor -->
-
-		</p>
 	</div>
-	</div>
+</div>
+
+
+<div class="helper-tools">
+	<hr/>
+	<p>HELPER TOOLS - not for production</p>
+	<form>
+	<input type="text" ng-model="template.name"> 
+	<button ng-click="addNew()">Add</button>
+	</form>
+</div>
+
 </div>

@@ -1,25 +1,29 @@
-<div class="login-background"></div>
+<div class="login-background">
 
-<div ng-if="!authData" class="login-container" id="loginContainer" ng-style="loading">
-	<div class="header"><h1>WELCOME</h1></div>
+<div   ng-if="!authData" class="login-container" id="loginContainer" ng-style="loading">
+	<div class="header"><h1>channelPLAY</h1>
+	<p>TEMPLATE CREATOR</p>
+	</div>
+
 	<div>
-		<form class="login-form" ng-submit="login(loginFormEmail, loginFormPassword)">
-		<div ng-if="loginError"><p class="error">{{loginError}}</p></div>
-
+		<form ng-style="authStyle" class="login-form" ng-submit="login(loginFormEmail, loginFormPassword)">
+		<div ng-if="loginError"class="error"><p>{{loginError}}</p></div>
 		<input type="email" ng-model="loginFormEmail" placeholder="Email Address">
-		<input ng-change="loginButtons = {'opacity': 1};" type="password" ng-model="loginFormPassword" placeholder="Password">
-
-		<div>
-			<button ng-click="login(loginFormEmail, loginFormPassword)">LOGIN</button>
-			<p style="text-align:center"><a ng-click="createUser(loginFormEmail, loginFormPassword)">or create a new account</a>
-			</p>
-		</div>
-
+		<input type="password" ng-model="loginFormPassword" placeholder="Password">
+		<button  ng-click="login(loginFormEmail, loginFormPassword)">
+		<span ng-if="!authenticating">LOGIN</span>
+		<span ng-if="authenticating">logging In...</span>
+		</button>
+		<p style="text-align:center"><a ng-click="createUser(loginFormEmail, loginFormPassword)">or create as a new account</a>
+		</p>
 		</form>
 	</div>
 </div>
 
 <div ng-if="authData" class="login-container">
-<div class="header">
-<h1>Welcome</h1>
-<p>Loading your templates...</p></div>
+	<div class="welcome-message">
+	<h1>WELCOME</h1>
+	<p>Loading your templates...</p></div>
+</div>
+
+</div>

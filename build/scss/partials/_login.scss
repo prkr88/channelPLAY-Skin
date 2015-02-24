@@ -7,7 +7,6 @@
 	  -moz-background-size: cover;
 	    -o-background-size: cover;
 	       background-size: cover;
-
 }
 
 .login-container {
@@ -16,16 +15,20 @@
 	display: block;
 	margin: auto;
 	transform: translateY(45%);
-	text-align: left;
-	// background: rgba(255, 255, 255, 0.8);
-	// box-shadow: 0px 0px 3px #aaa;
+	-webkit-transform: translateY(50%);
+	text-align: center;
+	letter-spacing: 0.4px;
 	padding: 40px;
 	transition: all 0.3s;
-	-webkit-animation: fadein 0.8s; /* Safari, Chrome and Opera > 12.1 */
-       -moz-animation: fadein 0.8s; /* Firefox < 16 */
-        -ms-animation: fadein 0.8s; /* Internet Explorer */
-         -o-animation: fadein 0.8s; /* Opera < 12.1 */
-            animation: fadein 0.8s;
+	-webkit-animation: fadein 1.8s; /* Safari, Chrome and Opera > 12.1 */
+       -moz-animation: fadein 1.8s; /* Firefox < 16 */
+        -ms-animation: fadein 1.8s; /* Internet Explorer */
+         -o-animation: fadein 1.8s; /* Opera < 12.1 */
+            animation: fadein 1.8s;
+}
+
+.login-form{
+	transition: all 0.3s;
 }
 
 @keyframes fadein {
@@ -39,21 +42,43 @@
     to   { opacity: 1; }
 }
 
+@-moz-keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+@-ms-animation fadein{
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+@-o-animation fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
 .header {
 	color: #fff;
+	text-align: center;
 	background: rgba(0, 0, 0, 0.7);
-	width: 190px;
 	padding:{
 		left:6px;
-		top:5px;
-	}
-	
-	// text-shadow: 0px 1px 2px #222;
+		top:10px;
+		bottom: 4px; 
 	}
 
+}
+.welcome-message{
+	color: #fff;
+	background: rgba(0, 0, 0, 0.7);
+	text-align: center;
+	padding: 40px;
+}
+
 .error {
-		padding-left:4px;
-		width: 220px;
+		display: block;
+		width: 100%;
+		text-align: center;
 		color: #fff;
 		background: rgba(0, 0, 0, 0.7);
 	}
@@ -61,7 +86,7 @@
 .login-form {
 	& input{
 		display: block;
-		width: 270px;
+		width: 280px;
 		height: 25px;
 		padding: 10px;
 		margin-top: 10px;
@@ -83,7 +108,7 @@
 			top: 10px;
 			bottom: 10px;
 			}
-		width: 294px;
+		width: 300px;
 		margin-bottom: 20px;
 		background: rgba(0, 0, 0, 0.7);
 		color: #fff;
@@ -92,6 +117,9 @@
 			background: rgba(255, 255, 255, 0.7);
 			color: #000;
 			transition: all 0.3s;
+		}
+		&:focus{
+			outline: none;
 		}
 	}
 	& a {

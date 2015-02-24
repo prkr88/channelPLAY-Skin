@@ -3,6 +3,26 @@
 	width: inherit;
 	height: 45px;
 	background: rgba(0, 0, 0, 0.7);
+	color: #efefef;
+
+	& ul {
+		margin-right: 40px;
+	}
+	& li {
+		float: right;
+		margin-left: 10px;
+		line-height: 45px;
+		vertical-align: middle;
+		font-size: 13px;
+		letter-spacing: 0.5px;
+
+		& a {
+			color: #fff;
+			&:hover{
+				border-bottom: 2px solid white;
+			}
+		}
+	}
 }
 
 .logout {
@@ -13,3 +33,73 @@
 .addNew {
 	float: right;
 }
+
+.list-container {
+	min-height: 500px;
+}
+
+.template-tile {
+	display: inline-block;
+	vertical-align:top;
+	width: 290px;
+	height: 400px;
+	margin: 20px;
+	border: 1px solid #ccc;
+
+	-webkit-animation: fadein 0.8s; /* Safari, Chrome and Opera > 12.1 */
+       -moz-animation: fadein 0.8s; /* Firefox < 16 */
+        -ms-animation: fadein 0.8s; /* Internet Explorer */
+         -o-animation: fadein 0.8s; /* Opera < 12.1 */
+            animation: fadein 0.8s;
+}
+
+@keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+/* Safari, Chrome and Opera > 12.1 */
+@-webkit-keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+@-moz-keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+@-ms-animation fadein{
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+@-o-animation fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+
+
+.helper-tools {
+	max-width:1024px;
+	margin:auto;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

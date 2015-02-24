@@ -25,7 +25,7 @@ app.config(['$routeProvider', '$locationProvider',
 
 			.when('/templates', {
 				templateUrl: 'templates.html',
-				controller: 'template-controller',
+				controller: 'templates-controller',
 				resolve: {
 			      "currentAuth": ["Auth", function(Auth) {
 			        return Auth.$requireAuth();
@@ -249,7 +249,7 @@ app.controller('font-controller', function($scope, $http){
 
 
 app.controller('auth-controller', function($scope, Auth, $location, $timeout){
-    var ref = new Firebase(firebaseURL);
+    
     // var auth = $firebaseAuth(ref);
 
     Auth.$onAuth(function(authData) {
@@ -262,15 +262,18 @@ app.controller('auth-controller', function($scope, Auth, $location, $timeout){
 	});
 
     $scope.login = function(email, password){
+    	var ref = new Firebase(firebaseURL);
+    	$scope.authenticating = true;
+
 	    ref.authWithPassword({
 		  email    : email,
 		  password : password
 		}, function(error, authData) {
 		  if (error) {
+		  	$scope.authenticating = false;
 		  	$scope.loginError = error.message;
 		  	$scope.$apply();
 		    console.log("Login Failed!", error.message);
-
 		  } else {
 		  	$scope.loading = {'opacity': 0};
 		    console.log("Authenticated successfully");
@@ -299,25 +302,59 @@ app.controller('auth-controller', function($scope, Auth, $location, $timeout){
 	};
 
 	$scope.logout = function(){
-		ref.unauth();
+		Auth.$unauth();
 	};
 
 
 
 })
 
-app.controller('template-controller', function($scope, Auth, $firebaseAuth, $location){
-	var ref = new Firebase(firebaseURL);
-    var auth = $firebaseAuth(ref);
-   	
-   	$scope.logout = function(){
-		ref.unauth();
-		$location.path('/');
-	};
+app.controller('templates-controller', function($scope, Auth, $firebase, $firebaseAuth, $location, $timeout){
+	$scope.loading = true;
 
     Auth.$onAuth(function(authData) {
 	    $scope.authData = authData;
+	    // console.log($scope.authData);
+	    if(authData){
+	    	syncFirebase(authData.uid);
+	    } 
 	});
+
+    var syncFirebase = function(uid){
+    	var ref = new Firebase(firebaseURL).child('users/'+uid+'/templates');
+    	var sync = $firebase(ref);
+    	var templatesArray = sync.$asArray();
+    	$scope.templates = templatesArray;
+    	if($scope.templates.length === 0){
+    		$scope.noTemplates = true;
+    	}
+    }
+
+
+   	$scope.logout = function(){
+		Auth.$unauth();
+		$timeout(function(){
+			$location.path('/');
+		}, 300);
+	};
+
+
+    $scope.newEntry = function(word){
+	    templates.$push({hello: word}).then(function(newChildRef) {
+  			console.log("added record with id " + newChildRef.key());
+  		})
+	}
+
+
+	//helper functions
+	$scope.addNew = function(){
+		$scope.template.author = $scope.authData.uid;
+		$scope.templates.$add($scope.template).then(function(newChildRef){
+			console.log("added new record: "+newChildRef.key());
+		});
+		$scope.template = '';
+	};
+
 
 
 })
