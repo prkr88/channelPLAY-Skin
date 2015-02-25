@@ -19,7 +19,8 @@
     "jquery": "~2.1.3",
     "angular-masonry": "~0.11.0",
     "angular-images-loaded": "~0.0.5",
-    "angular-touch": "~1.3.13"
+    "angular-touch": "~1.3.13",
+    "angular-colorthief": "~0.1.0"
   },
   "resolutions": {
     "angular": "1.3.13"

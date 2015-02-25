@@ -21,6 +21,12 @@
 		<label>Background Image URL</label>
 		<input type="text" ng-model="template.backgroundUrl" placeholder="backgroundUrl">
 
+<!-- 		<label>Color Thief</label>
+		<img src="/src/assets/low_poly_background_alternant.jpg" width="100" color-thief color-thief-dominant="colors.dominantColor">
+		<div class="averageColor" ng-style="{'background-color': 'rgb('+colors.dominantColor[0]+', '+colors.dominantColor[1]+', '+colors.dominantColor[2]+')'}"></div>
+		<br/><br/> -->
+		
+
 		<label>Logo URL</label>
 		<input type="text" ng-model="template.logoUrl" placeholder="logoUrl">
 
@@ -47,7 +53,14 @@
 			</div>
 
 		</fieldset>
+		<hr/>
 
+		<fieldset>
+			<h3>Custom CSS</h3>
+			<br/>
+			<label>Be careful, use the inspector, and try not to break anything...</label>
+			<textarea type="text" ng-model="template.customStyles" placeholder="custom css"></textarea>
+		</fieldset>
 
 
 		<!-- <fieldset>

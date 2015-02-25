@@ -2,8 +2,9 @@
 	position: absolute;
 	height: 100%;
 	width: 100%;
+	overflow: hidden;
 	background-image: url('/src/assets/low_poly_background.jpg');
-	background-position: center;
+	background-position: bottom;
    -webkit-background-size: cover;
 	  -moz-background-size: cover;
 	    -o-background-size: cover;
@@ -15,11 +16,11 @@
 	width: 300px;
 	display: block;
 	margin: auto;
-	transform: translateY(50%);
+	transform: translateY(60%);
 	margin-top: 40px;
 	@media screen and (orientation: portrait){
 		transform: translateY(30%);
-		margin-top: 100px;
+		margin-top: 0px;
 	}
 	text-align: center;
 	letter-spacing: 0.4px;

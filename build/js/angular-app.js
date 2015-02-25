@@ -2,7 +2,7 @@ var skin = skin; //load in the schema
 var firebaseURL = "https://brilliant-heat-8775.firebaseio.com"
 
 //Define angular app
-var app = angular.module('app', ['templatescache', 'ngRoute', 'webfont-loader', 'firebase'])
+var app = angular.module('app', ['templatescache', 'ngRoute', 'webfont-loader', 'firebase', 'ngColorThief'])
 
 app.run(function($rootScope, $location){
 	$rootScope.$on("$routeChangeError", function(event, next, previous, error) {
@@ -207,10 +207,10 @@ app.controller('edit-controller', function($scope, $firebase, Auth, $routeParams
 
 	$scope.$watch('template.navigation.itemString', function(newVal, oldVal){
 		if(newVal){
-		// console.log(newVal.split(", "));
-		$scope.template.navigation.items = newVal.split(", ");
-		}
+			$scope.template.navigation.items = newVal.split(", ");
+			}
 	});
+
 
 })
 

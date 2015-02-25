@@ -44,6 +44,13 @@ $outer-width: 1170px;
 			line-height: $login-nav-height;
 			text-align: middle;
 			font-size: 0.9rem;
+			& a {
+				color: #fff;
+				&:hover{
+					color: #ccc;
+					border-bottom: none;
+				}
+			}
 		}
 	}
 }
