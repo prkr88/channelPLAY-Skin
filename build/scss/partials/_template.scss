@@ -1,0 +1,208 @@
+$outer-width: 1200px;
+
+.border {
+	border: 1px solid black;
+	border-collapse: collapse;
+	box-sizing: border-box;
+}
+
+.skin-container {
+	display: block;
+	margin: auto;
+
+}
+
+.section-container {
+	display: block;
+	min-height: 200px;
+}
+
+#hero {
+	height: 1100px;
+	background:{
+		color: #efefef;
+		size: cover;
+		position: center;
+	}
+}
+
+//this is for the top navigation for login/sign up
+#login-nav {
+	$login-nav-height: 36px;
+
+	display: block;
+	height: $login-nav-height;
+	background: {
+		color: #fff;
+	}
+	& ul {
+		display: block;
+		width: $outer-width;
+		margin: auto;
+		& li{
+			float: right;
+			margin-left: 1rem;
+			line-height: $login-nav-height;
+			text-align: middle;
+		}
+	}
+}
+
+//the main skin navigation, logo and search
+
+.nav-and-search-container {
+	display: block;
+	height: 200px;
+	width: $outer-width;
+	margin: auto;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+$logo-search-height: 100px;
+
+.logo-container {
+	display: inline-block;
+	height: $logo-search-height;
+	min-width: 300px;
+}
+
+
+//SEARCH
+.search-container {
+	display: inline-block;
+	height: $logo-search-height;
+	width: 600px;
+	float: right;
+}
+.search-box {
+	float: right;
+	& button {
+		display: inline-block;
+		vertical-align: top;
+		height: 35px;
+		padding:{
+			left: 30px;
+			right: 30px;
+			top: 0px;
+			bottom: 0px;
+		}
+		background-color: #444;
+		color: #fff;
+		outline: none;
+	&:hover{
+		background-color: #222;
+		color: #fff;
+		}
+	}
+	& input {
+		margin-right: -6px;
+		border: none;
+	}
+}
+
+#search-field {
+	display: inline-block;
+	vertical-align: top;
+	width: 400px;
+	height: 25px;
+	padding-left: 8px;
+	// border-radius: 2px;
+	&:focus {
+		outline: none;
+	}
+}
+
+
+$main-navigation-height: 45px;
+.main-navigation {
+	display: block;
+	background-color: #222;
+	color: #fff;
+	text-align: right;
+}
+.main-nav-container {
+	display: inline-block;
+	vertical-align: top;
+	height: $main-navigation-height;
+	float: left;
+	border-right: 4px solid #FFF;
+	background-color: #006992;
+	color: #fff;
+	& ul {
+		& li {
+			line-height: $main-navigation-height;
+			height: $main-navigation-height;
+			float: left;
+			padding-left: 2.5rem;
+			&::after{
+				margin-left: 2.5rem;
+				content: "|";
+			}
+			&:last-child:after{
+				content: "";
+			}
+			& a {
+				margin: 0;
+				color: inherit;
+			}
+			& a:hover{
+				color: #CCC;
+				border-bottom: none;
+			}
+		}
+	}
+}
+
+.social-container {
+	display: inline-block;
+	vertical-align: top;
+	padding-right: 1.5rem;
+	& ul {
+		& li{
+			float: right;
+			margin-left: 1.5rem;
+			line-height: $main-navigation-height;
+			font-size: 1.5rem;
+			& a {
+				margin: 0;
+				color: inherit;
+			}
+			& a:hover{
+				color: #999;
+				border-bottom: none;
+			}
+		}
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

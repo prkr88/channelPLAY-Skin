@@ -126,7 +126,6 @@ app.controller('auth-controller', function($scope, Auth, $location, $timeout){
 })
 
 app.controller('templates-controller', function($scope, Auth, $firebase, $location, $timeout){
-
     Auth.$onAuth(function(authData) {
 	    $scope.authData = authData;
 	    // console.log($scope.authData);

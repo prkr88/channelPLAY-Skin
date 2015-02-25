@@ -1,10 +1,86 @@
-<div class="content-container">
-<br/>
-<h1>Template Viewer</h1><br/>
-<p>All the data uses three-way binding, so as you edit the template it will update live on any other machine!<br/>
-This could be used in a workshop to make live adjustments to the content and branding from a tablet while the skin is presented on a TV.</p>
-<br/><p>Try it out by opening the edit panel on another device and watch the changes apply in real time. </p>
-<br/>
+<div class="content-container" ng-show="infoHidden">
+	<br/>
+	<h1>Template Viewer</h1><br/>
+	<p>All the data uses three-way binding, so as you edit the template it will update live on any other machine!<br/>
+	This could be used in a workshop to make live adjustments to the content and branding from a tablet while the skin is presented on a TV.
+	</p>
+	<br/><p>Try it out by opening the edit panel on another device and watch the changes apply in real time. </p>
+	<button ng-click"infoHidden = true">Hide Intro</button>
+	<br/>
+	<hr/>
+</div>
+
+<!-- SKIN STARTS HERE -->
+<div class="skin-container">
+	<div class="section-container" id="hero" ng-style="{'background-image': 'url(' + template.hero.imageUrl + ')'}">
+
+	<!-- TOP NAV -->
+	<nav id="login-nav">
+		<ul>
+			<li>Log In</li>
+			<li>Register</li>
+		</ul>
+	</nav>
+
+	<!-- MAIN NAV AND SEARCH -->
+	<div class="nav-and-search-container">
+		<!-- LOGO -->
+		<div class="logo-container">
+			<h3>LOGO HERE</h3>
+		</div>
+
+		<!-- SEARCH -->
+		<div class="search-container">
+			<div class="search-box">
+				<input id="search-field" type="text" placeholder="Search for videos by title, category, or description">
+				<button id="search-button">Search</button>
+				<p><strong>Popular Searches:</strong> lorem ipsum, del atore</p>
+			</div>
+		</div>
+		<!-- MAIN NAV -->
+		<nav class="main-navigation">
+			<div class="main-nav-container">
+				<ul>
+					<li><a>Education</a></li>
+					<li><a>Business</a></li>
+					<li><a>Money</a></li>
+					<li><a>News</a></li>
+					<li><a>Retail</a></li>
+					<li><a>About Us</a></li>
+				</ul>
+			</div>
+			<div class="social-container">
+				<ul>
+					<li><a><i class="fa fa-facebook-official"></i></a></li>
+					<li><a><i class="fa fa-twitter"></i></a></li>
+					<li><a><i class="fa fa-pinterest"></i></a></li>
+					<li><a><i class="fa fa-instagram"></i></a></li>
+				</ul>
+			</div>
+		</nav>
+
+	</div>
+
+	</div>
+	<div class="section-container border" id="section1">
+		
+	</div>
+	<div class="section-container border" id="section2">
+		
+	</div>
+	<div class="section-container border" id="watchlist">
+		
+	</div>
+	<footer class="section-container boder">
+		
+	</footer>
+
+
+
+</div>
+
+<!-- 
+
 <hr/>
 <br/>
 <h2>{{template.name}}</h2>
@@ -13,4 +89,4 @@ This could be used in a workshop to make live adjustments to the content and bra
 <br/>
 <img ng-src="{{template.hero.imageUrl}}" width="500" height="auto">
 
-</div>
+</div> -->
