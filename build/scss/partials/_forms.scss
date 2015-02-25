@@ -2,13 +2,15 @@ $form-width: 300px;
 $form-padding: 8px;
 
 .edit-template-form {
+	margin-bottom: 120px;
+	
 	label {
 		display: block;
 		font-size: 13px;
 		margin-bottom: ($form-padding/2);
 	}
 
-	input {
+	input[type="text"] {
 		display: block;
 		padding: $form-padding;
 		margin-bottom: ($form-padding*2);
@@ -33,4 +35,25 @@ $form-padding: 8px;
 		border: none;
 	}
 
+	input[type="checkbox"]{
+		float: left; 
+		margin-right:5px;
+		margin-left: 10px;
+		margin-top: 2px;
+	}
+
+	.social-icons {
+		margin-top: 20px;
+		margin-bottom: 20px;
+		& label {
+			margin-bottom: 10px;
+		}
+	}
+}
+
+
+
+#social-table {
+	text-align: left;
+	margin-bottom: 40px;
 }

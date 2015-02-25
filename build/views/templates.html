@@ -21,7 +21,7 @@
 	<div class="list-container">
 		<p ng-if="noTemplates">Looks like you don't have any templates yet! Click 'Create a new template' to get started.</p>
 		<div class="template-tile" ng-repeat="template in templates">
-			<div class="template-image" ng-style="{'background-image':'url({{template.hero.imageUrl}})'}"></div>
+			<div class="template-image" ng-style="{'background-image': 'url(' + template.backgroundUrl + ')'}"></div>
 			<div class="template-info">
 				<h3>{{template.name}}</h3>
 				<p class="template-client">{{template.client}}</p>

@@ -126,12 +126,12 @@ app.controller('auth-controller', function($scope, Auth, $location, $timeout){
 })
 
 app.controller('templates-controller', function($scope, Auth, $firebase, $location, $timeout){
+	$scope.templates = [];
+
     Auth.$onAuth(function(authData) {
 	    $scope.authData = authData;
-	    // console.log($scope.authData);
 	    if(authData){
 	    	syncFirebase(authData.uid);
-	    	defineSchema();
 	    } 
 	});
 
@@ -140,25 +140,25 @@ app.controller('templates-controller', function($scope, Auth, $firebase, $locati
     	var sync = $firebase(ref);
     	var templatesArray = sync.$asArray();
     	$scope.templates = templatesArray;
-    	$timeout(function(){
-    		if($scope.templates.length === 0){
-    			$scope.noTemplates = true;
-    		}
-    	}, 1000);
     };
 
-    var defineSchema = function(){
-    	//define creation schema here
-		$scope.template = {
-			author : $scope.authData.uid,
-			name : "Placeholder Name",
-			client : "Placeholder Client",
-			description: "Edit the template to setup a description, and customise the content.",
-			hero : {
-				imageUrl : "http://walterlow.com/wp/wp-content/uploads/2013/12/Island.jpg"
-			}
-		};
-    }
+    //Checks if there are any templates and displays the welcome text if there aren't any.
+    $scope.$watchCollection('templates', function(newVal, oldVal, scope){
+		if(newVal.length === 0){
+			$scope.noTemplates = true;
+		}
+		else {
+			$scope.noTemplates = false;
+		}
+    });
+
+	$scope.template = {
+		name : "New Template",
+		client : "New Client",
+		description: "Click edit to customise the content.",
+		backgroundUrl : "http://walterlow.com/wp/wp-content/uploads/2013/12/Island.jpg"
+	};
+
 
    	$scope.logout = function(){
 		Auth.$unauth();
@@ -169,21 +169,14 @@ app.controller('templates-controller', function($scope, Auth, $firebase, $locati
 
 	$scope.createNewTemplate = function(){
 		$scope.creatingTemplate = true;
-		$scope.templates.$add($scope.template).then(function(newChildRef){
-			$timeout(function(){
-				$location.path('/edit/'+newChildRef.key());
-			}, 1200);
-		});
-	}
-
-	//helper functions
-	$scope.addNew = function(){
 		$scope.template.author = $scope.authData.uid;
 		$scope.templates.$add($scope.template).then(function(newChildRef){
-			console.log("added new record: "+newChildRef.key());
+			$timeout(function(){
+				$scope.creatingTemplate = false;
+				// $location.path('/edit/'+newChildRef.key());
+			}, 800);
 		});
-		$scope.template = '';
-	};
+	}
 
 	$scope.deleteTemplate = function(index){
 		if (confirm('Are you sure? This template will not be recoverable.')) {
@@ -210,12 +203,20 @@ app.controller('edit-controller', function($scope, $firebase, Auth, $routeParams
 		var template = sync.$asObject();
 		template.$bindTo($scope, 'template');
 	};
+	
+
+	$scope.$watch('template.navigation.itemString', function(newVal, oldVal){
+		if(newVal){
+		// console.log(newVal.split(", "));
+		$scope.template.navigation.items = newVal.split(", ");
+		}
+	});
+
 })
 
 app.controller('view-controller', function($scope, $firebase, $routeParams){
 	var id = $routeParams.id;
 	var uid = $routeParams.uid;
-
 	var ref = new Firebase(firebaseURL).child('users/'+uid+'/templates/'+id);
 	var sync = $firebase(ref);
 	var template = sync.$asObject();

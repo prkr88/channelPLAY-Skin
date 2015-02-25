@@ -1,4 +1,4 @@
-$outer-width: 1200px;
+$outer-width: 1170px;
 
 .border {
 	border: 1px solid black;
@@ -32,9 +32,8 @@ $outer-width: 1200px;
 
 	display: block;
 	height: $login-nav-height;
-	background: {
-		color: #fff;
-	}
+	background: rgba(20, 20, 20, 0.8);
+	color: #fff;
 	& ul {
 		display: block;
 		width: $outer-width;
@@ -44,6 +43,7 @@ $outer-width: 1200px;
 			margin-left: 1rem;
 			line-height: $login-nav-height;
 			text-align: middle;
+			font-size: 0.9rem;
 		}
 	}
 }
@@ -55,6 +55,7 @@ $outer-width: 1200px;
 	height: 200px;
 	width: $outer-width;
 	margin: auto;
+	margin-top: 40px;
     -webkit-touch-callout: none;
     -webkit-user-select: none;
     -khtml-user-select: none;
@@ -67,10 +68,18 @@ $logo-search-height: 100px;
 
 .logo-container {
 	display: inline-block;
+	vertical-align: middle;
 	height: $logo-search-height;
 	min-width: 300px;
+	padding:{
+		top: 20px;
+		bottom: 20px;
+	}
+	& img {
+		max-width: 400px;
+		max-height: 80px;
+	}
 }
-
 
 //SEARCH
 .search-container {
@@ -78,40 +87,47 @@ $logo-search-height: 100px;
 	height: $logo-search-height;
 	width: 600px;
 	float: right;
+	color: #222;
 }
 .search-box {
+	margin-top: 60px;
 	float: right;
+	display: block;
+	bottom: 0;
+	right: 0;
 	& button {
 		display: inline-block;
-		vertical-align: top;
-		height: 35px;
+		vertical-align: middle;
+		height: 40px;
 		padding:{
-			left: 30px;
-			right: 30px;
+			left: 35px;
+			right: 35px;
 			top: 0px;
 			bottom: 0px;
 		}
-		background-color: #444;
-		color: #fff;
+		background-color: #222;
+		color: #FFF;
 		outline: none;
+		border: 2px solid #fff;
+		border-radius: 4px;
+		border-collapse: collapse;
+		box-sizing: border-box;
 	&:hover{
 		background-color: #222;
 		color: #fff;
 		}
 	}
-	& input {
-		margin-right: -6px;
-		border: none;
-	}
 }
 
 #search-field {
 	display: inline-block;
-	vertical-align: top;
+	vertical-align: middle;
+	margin-right: -10px;
+	border: none;
 	width: 400px;
-	height: 25px;
+	height: 30px;
 	padding-left: 8px;
-	// border-radius: 2px;
+	border-radius: 4px;
 	&:focus {
 		outline: none;
 	}
@@ -120,8 +136,9 @@ $logo-search-height: 100px;
 
 $main-navigation-height: 45px;
 .main-navigation {
+
 	display: block;
-	background-color: #222;
+	background: rgba(20, 20, 20, 0.8);
 	color: #fff;
 	text-align: right;
 }
@@ -129,9 +146,11 @@ $main-navigation-height: 45px;
 	display: inline-block;
 	vertical-align: top;
 	height: $main-navigation-height;
+	overflow-y: hidden;
 	float: left;
-	border-right: 4px solid #FFF;
-	background-color: #006992;
+
+	// border-right: 4px solid #FFF;
+	background-color: rgba(20, 20, 20, 0.8);
 	color: #fff;
 	& ul {
 		& li {
@@ -162,6 +181,7 @@ $main-navigation-height: 45px;
 	display: inline-block;
 	vertical-align: top;
 	padding-right: 1.5rem;
+	height: $main-navigation-height;
 	& ul {
 		& li{
 			float: right;

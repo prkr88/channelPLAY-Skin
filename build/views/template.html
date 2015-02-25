@@ -12,7 +12,7 @@
 
 <!-- SKIN STARTS HERE -->
 <div class="skin-container">
-	<div class="section-container" id="hero" ng-style="{'background-image': 'url(' + template.hero.imageUrl + ')'}">
+	<div class="section-container" id="hero" ng-style="{'background-image': 'url(' + template.backgroundUrl + ')'}">
 
 	<!-- TOP NAV -->
 	<nav id="login-nav">
@@ -25,54 +25,57 @@
 	<!-- MAIN NAV AND SEARCH -->
 	<div class="nav-and-search-container">
 		<!-- LOGO -->
-		<div class="logo-container">
-			<h3>LOGO HERE</h3>
-		</div>
+		<div class="logo-search-container">
+			<div class="logo-container">
+				<img ng-src="{{template.logoUrl}}">
+			</div>
 
-		<!-- SEARCH -->
-		<div class="search-container">
-			<div class="search-box">
-				<input id="search-field" type="text" placeholder="Search for videos by title, category, or description">
-				<button id="search-button">Search</button>
-				<p><strong>Popular Searches:</strong> lorem ipsum, del atore</p>
+			<!-- SEARCH -->
+			<div class="search-container">
+				<div class="search-box">
+					<input id="search-field" type="text" placeholder="Search for videos by title, category, or description">
+					<button id="search-button">Search</button>
+					<p><strong>Popular Searches:</strong> {{template.navigation.popularSearches}}</p>
+				</div>
 			</div>
 		</div>
 		<!-- MAIN NAV -->
 		<nav class="main-navigation">
 			<div class="main-nav-container">
 				<ul>
-					<li><a>Education</a></li>
-					<li><a>Business</a></li>
-					<li><a>Money</a></li>
-					<li><a>News</a></li>
-					<li><a>Retail</a></li>
-					<li><a>About Us</a></li>
+					<li ng-repeat=" item in template.navigation.items"><a>{{item}}</a></li>
 				</ul>
 			</div>
 			<div class="social-container">
 				<ul>
-					<li><a><i class="fa fa-facebook-official"></i></a></li>
-					<li><a><i class="fa fa-twitter"></i></a></li>
-					<li><a><i class="fa fa-pinterest"></i></a></li>
-					<li><a><i class="fa fa-instagram"></i></a></li>
+					<li ng-if="template.navigation.social.facebook"><a><i class="fa fa-facebook-official"></i></a></li>
+					<li ng-if="template.navigation.social.twitter"><a><i class="fa fa-twitter"></i></a></li>
+					<li ng-if="template.navigation.social.pintrest"><a><i class="fa fa-pinterest"></i></a></li>
+					<li ng-if="template.navigation.social.instagram"><a><i class="fa fa-instagram"></i></a></li>
+					<li ng-if="template.navigation.social.linkedin"><a><i class="fa fa-linkedin"></i></a></li>
+					<li ng-if="template.navigation.social.reddit"><a><i class="fa fa-reddit"></i></a></li>
+					<li ng-if="template.navigation.social.youtube"><a><i class="fa fa-youtube"></i></a></li>
 				</ul>
 			</div>
 		</nav>
+
+
+
 
 	</div>
 
 	</div>
 	<div class="section-container border" id="section1">
-		
+		section 1
 	</div>
 	<div class="section-container border" id="section2">
-		
+		section 2
 	</div>
 	<div class="section-container border" id="watchlist">
-		
+		watchlist
 	</div>
 	<footer class="section-container boder">
-		
+		footer
 	</footer>
 
 

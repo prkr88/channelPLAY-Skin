@@ -18,9 +18,46 @@
 		<label>Description</label>
 		<textarea type="text" ng-model="template.description" placeholder="description"></textarea>
 
-		<label>Hero Image</label>
-		<input type="text" ng-model="template.hero.imageUrl" placeholder="imageUrl">
+		<label>Background Image URL</label>
+		<input type="text" ng-model="template.backgroundUrl" placeholder="backgroundUrl">
+
+		<label>Logo URL</label>
+		<input type="text" ng-model="template.logoUrl" placeholder="logoUrl">
+
 		</fieldset>
+		<fieldset>
+			<h3>Navigation</h3>
+			<br/>
+			<label>Navigation Items (comma seperated)</label>
+			<input type="text" ng-model="template.navigation.itemString">
+
+			<label>Popular Search Items</label>
+			<input type="text" ng-model="template.navigation.popularSearches">
+			
+			<h3>Social Icons</h3>
+
+			<div class="social-icons">
+				<input type="checkbox" ng-model="template.navigation.social.facebook"><label> Facebook</label>
+				<input type="checkbox" ng-model="template.navigation.social.twitter"><label> Twitter</label>
+				<input type="checkbox" ng-model="template.navigation.social.pintrest"><label> Pintrest</label>
+				<input type="checkbox" ng-model="template.navigation.social.instagram"><label> Instagram</label>
+				<input type="checkbox" ng-model="template.navigation.social.linkedin"><label> LinkedIn</label>
+				<input type="checkbox" ng-model="template.navigation.social.reddit"><label> Reddit</label>
+				<input type="checkbox" ng-model="template.navigation.social.youtube"><label> YouTube</label>
+			</div>
+
+		</fieldset>
+
+
+
+		<!-- <fieldset>
+		<h3>Hero</h3>
+		<br/>
+
+		<label>Image URL</label>
+		<input type="text" ng-model="template.hero.imageUrl" placeholder="imageUrl">
+
+		</fieldset> -->
 
 		<a href="templates"><button>Finished</button></a>
 	</form>
