@@ -1,5 +1,10 @@
 $form-width: 300px;
 $form-padding: 8px;
+.ace_editor { 
+	height: 300px;
+	max-width: 960px;
+	font-family: monospace;
+	}
 
 .edit-template-form {
 	margin-bottom: 120px;

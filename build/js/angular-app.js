@@ -2,7 +2,7 @@ var skin = skin; //load in the schema
 var firebaseURL = "https://brilliant-heat-8775.firebaseio.com"
 
 //Define angular app
-var app = angular.module('app', ['templatescache', 'ngRoute', 'webfont-loader', 'firebase', 'ngColorThief'])
+var app = angular.module('app', ['templatescache', 'ngRoute','firebase', 'ui.ace'])
 
 app.run(function($rootScope, $location){
 	$rootScope.$on("$routeChangeError", function(event, next, previous, error) {
