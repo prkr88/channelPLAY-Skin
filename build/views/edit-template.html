@@ -1,10 +1,26 @@
+<nav class="templateNav">
 <div class="content-container">
+<ul>
+	<li><a ng-click="logout()">Logout</a></li>
+	<li> | </li>
+	<li>{{authData.password.email}}</li>
+	</ul>
+</div>
+</nav>
+
+
+<div class="content-container">
+	<a href="templates"><p>Back to all templates</p></a>
 	<br/><br/>
 	<div>
 	<form class="edit-template-form">
 		<h2>Edit Template</h2>
-		<p>NOTE: All changes apply live, there's no need to save and there's no undo. Currently under development, some fields may not work or be visible.</p>
+		<p>NOTE: All changes apply live, there's no need to save and there's no undo. Currently under development, some fields may not work or be visible.</p> 
 		<br/><hr/><br/>
+		<span style="float:right">
+			<a ng-href="template/{{authData.uid}}/{{template.$id}}"><button>Preview</button></a>
+		</span>
+			
 
 		<fieldset>
 		<h3>Global Properties</h3>
@@ -34,7 +50,7 @@
 		<fieldset>
 			<h3>Navigation</h3>
 			<br/>
-			<label>Navigation Items (comma seperated)</label>
+			<label>Navigation Items (comma seperated | limit of 7)</label>
 			<input type="text" ng-model="template.navigation.itemString">
 
 			<label>Popular Search Items</label>
@@ -52,14 +68,24 @@
 				<input type="checkbox" ng-model="template.navigation.social.youtube"><label> YouTube</label>
 			</div>
 
+			<span style="float:right">
+				<a ng-href="template/{{authData.uid}}/{{template.$id}}"><button>Preview</button></a>
+			</span>
 		</fieldset>
+		<br/>
 		<hr/>
 
 		<fieldset>
 			<h3>Custom CSS</h3>
 			<br/>
-			<label>Be careful, use the inspector, and try not to break anything...</label>
-			<textarea type="text" ng-model="template.customStyles" placeholder="custom css"></textarea>
+			<label>Be careful, use the inspector, and try not to break anything!</label>
+			<br/>
+			<div ui-ace="{
+						 useWrapMode : true,
+						 theme:'github',
+						 mode: 'css',
+						 onChange: aceChanged}" ng-model="template.customStyles"></div>
+			<br/>
 		</fieldset>
 
 
@@ -72,7 +98,7 @@
 
 		</fieldset> -->
 
-		<a href="templates"><button>Finished</button></a>
+		
 	</form>
 	</div>
 </div>

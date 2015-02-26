@@ -1,4 +1,10 @@
-$outer-width: 1170px;
+$outer-width: 1000px;
+
+.edit-tools {
+	padding-top: 5px;
+	padding-left: 20px;
+	padding-bottom: 8px;
+}
 
 .border {
 	border: 1px solid black;
@@ -9,12 +15,12 @@ $outer-width: 1170px;
 .skin-container {
 	display: block;
 	margin: auto;
-
 }
 
 .section-container {
 	display: block;
 	min-height: 200px;
+	overflow-y: hidden;
 }
 
 #hero {
@@ -26,24 +32,41 @@ $outer-width: 1170px;
 	}
 }
 
-//this is for the top navigation for login/sign up
-#login-nav {
-	$login-nav-height: 36px;
 
+//LOGIN/SIGN UP LINKS IN THE TOP RIGHT
+#login-nav {
+	//VARIABLES
+	$login-nav-height: 36px;
+	$border-style: 1px solid #444;
+	//STYLES
 	display: block;
 	height: $login-nav-height;
 	background: rgba(20, 20, 20, 0.8);
 	color: #fff;
 	& ul {
 		display: block;
-		width: $outer-width;
-		margin: auto;
+		float: right;
+		margin-right: 1rem;
+		@media screen and (min-width: 1024px){
+			width: $outer-width;
+			margin: auto;
+			float: none;
+		}
 		& li{
 			float: right;
-			margin-left: 1rem;
 			line-height: $login-nav-height;
-			text-align: middle;
 			font-size: 0.9rem;
+			padding: {
+				left: 0.8rem;
+				right: 0.8rem;
+			}
+			border:{
+				left: $border-style;
+				right: $border-style;
+			}
+			&:last-child{
+				border-right: none;
+			}
 			& a {
 				color: #fff;
 				&:hover{
@@ -56,52 +79,58 @@ $outer-width: 1170px;
 }
 
 //the main skin navigation, logo and search
-
 .nav-and-search-container {
 	display: block;
-	height: 200px;
-	width: $outer-width;
-	margin: auto;
-	margin-top: 40px;
-    -webkit-touch-callout: none;
-    -webkit-user-select: none;
-    -khtml-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
+	max-width: $outer-width;
+	padding: 1rem;
+	margin: {
+		left: auto;
+		right: auto;
+	}
+}
+
+.logo-search-container {
+	display: block;
+	width: 100%;
+	// border: 1px solid yellow;
+	min-height: 100px;
+	margin-bottom: 20px;
+	position: relative;
 }
 
 $logo-search-height: 100px;
-
 .logo-container {
-	display: inline-block;
-	vertical-align: middle;
-	height: $logo-search-height;
-	min-width: 300px;
-	padding:{
-		top: 20px;
-		bottom: 20px;
-	}
+	// border: 1px solid blue;
+	display: block;
+	height: 100px;
+	max-width: 230px;
+	margin: 0;
 	& img {
-		max-width: 400px;
-		max-height: 80px;
+		max-height: 100px;
+	}
+	@media screen and (max-width: 660px){
+		margin: auto;
+		text-align: center;
 	}
 }
 
 //SEARCH
 .search-container {
-	display: inline-block;
-	height: $logo-search-height;
-	width: 600px;
-	float: right;
-	color: #222;
-}
-.search-box {
-	margin-top: 60px;
-	float: right;
+	// border: 1px solid green;
 	display: block;
+	position: absolute;
 	bottom: 0;
 	right: 0;
+	@media screen and (max-width: 660px){
+		// margin-top: 20px;
+		// margin-left: auto;
+		// margin-right: auto;
+		// position: relative;
+		display: none;
+	}
+}
+
+.search-box {
 	& button {
 		display: inline-block;
 		vertical-align: middle;
@@ -132,6 +161,11 @@ $logo-search-height: 100px;
 	margin-right: -10px;
 	border: none;
 	width: 400px;
+	transition: width 0.8s;
+	@media screen and (max-width: 960px){
+		width: 280px;
+		transition: width 0.8s;
+	}
 	height: 30px;
 	padding-left: 8px;
 	border-radius: 4px;
@@ -142,32 +176,30 @@ $logo-search-height: 100px;
 
 
 $main-navigation-height: 45px;
-.main-navigation {
-
-	display: block;
-	background: rgba(20, 20, 20, 0.8);
-	color: #fff;
-	text-align: right;
-}
+// .main-navigation {
+// 	display: block;
+// 	background: rgba(20, 20, 20, 0.8);
+// 	color: #fff;
+// 	text-align: right;
+// }
 .main-nav-container {
-	display: inline-block;
-	vertical-align: top;
+	display:block;
+	position: relative;
 	height: $main-navigation-height;
-	overflow-y: hidden;
-	float: left;
-
-	// border-right: 4px solid #FFF;
 	background-color: rgba(20, 20, 20, 0.8);
 	color: #fff;
-	& ul {
+	.navigation-links {
 		& li {
 			line-height: $main-navigation-height;
 			height: $main-navigation-height;
 			float: left;
-			padding-left: 2.5rem;
+			text-align: center;
+			padding-left: 1.6rem;
+			font-size: 0.9rem;
+			background-color: rgba(20, 20, 20, 0.8);
 			&::after{
-				margin-left: 2.5rem;
 				content: "|";
+				margin-left: 1.6rem;
 			}
 			&:last-child:after{
 				content: "";
@@ -180,21 +212,42 @@ $main-navigation-height: 45px;
 				color: #CCC;
 				border-bottom: none;
 			}
+			@media screen and (max-width:960px){
+				padding-left: 1rem;
+				font-size: 0.85rem;
+				&::after{
+					margin-left: 1rem;
+				}
+			}
+			@media screen and (max-width:767px){
+				padding-left: 0.7rem;
+				font-size: 0.8rem;
+				&::after{
+					margin-left: 0.7rem;
+				}
+			}
 		}
+	}
+	@media screen and (max-width:660px){
+		display: none;
 	}
 }
 
 .social-container {
 	display: inline-block;
 	vertical-align: top;
-	padding-right: 1.5rem;
+	padding-right: 1rem;
 	height: $main-navigation-height;
+	float: right;
 	& ul {
 		& li{
 			float: right;
-			margin-left: 1.5rem;
+			margin-left: 1rem;
 			line-height: $main-navigation-height;
-			font-size: 1.5rem;
+			font-size: 1.2rem;
+			@media screen and (max-width:768px){
+					font-size: 1rem;
+				}
 			& a {
 				margin: 0;
 				color: inherit;
@@ -211,12 +264,42 @@ $main-navigation-height: 45px;
 
 
 
+@media screen and (max-width: 1024px){
+	//styles for iPad/tablet portrait
+	.nav-and-search-container {
+		padding: 1rem;
+	}
+}
 
+@media screen and (max-width: 960px){
+	//styles for laptop/tablet landscape
+	
+}
 
+@media screen and (max-width: 768px){
+	//styles for iPad/tablet portrait
 
+}
 
+@media screen and (max-width: 540px){
+	//styles for large phone
 
+}
 
+@media screen and (max-width: 480px){
+	//styles for medium phone
+
+}
+
+@media screen and (max-width: 320px){
+	//styles for small phone
+
+}
+
+@media screen and (max-width: 250px){
+	//styles for rediculously small phone
+
+}
 
 
 

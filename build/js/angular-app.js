@@ -2,7 +2,7 @@ var skin = skin; //load in the schema
 var firebaseURL = "https://brilliant-heat-8775.firebaseio.com"
 
 //Define angular app
-var app = angular.module('app', ['templatescache', 'ngRoute', 'webfont-loader', 'firebase', 'ngColorThief'])
+var app = angular.module('app', ['templatescache', 'ngRoute','firebase', 'ui.ace'])
 
 app.run(function($rootScope, $location){
 	$rootScope.$on("$routeChangeError", function(event, next, previous, error) {
@@ -187,7 +187,7 @@ app.controller('templates-controller', function($scope, Auth, $firebase, $locati
 	};
 })
 
-app.controller('edit-controller', function($scope, $firebase, Auth, $routeParams, $location){
+app.controller('edit-controller', function($scope, $firebase, Auth, $routeParams, $location, $timeout){
 	Auth.$onAuth(function(authData) {
 	    $scope.authData = authData;
 	    if(authData){
@@ -211,10 +211,16 @@ app.controller('edit-controller', function($scope, $firebase, Auth, $routeParams
 			}
 	});
 
+	$scope.logout = function(){
+		Auth.$unauth();
+		$timeout(function(){
+			$location.path('/');
+		}, 300);
+	};
 
 })
 
-app.controller('view-controller', function($scope, $firebase, $routeParams){
+app.controller('view-controller', function($scope, $firebase, $routeParams, $window, Auth, $location, $timeout){
 	var id = $routeParams.id;
 	var uid = $routeParams.uid;
 	var ref = new Firebase(firebaseURL).child('users/'+uid+'/templates/'+id);
@@ -222,6 +228,22 @@ app.controller('view-controller', function($scope, $firebase, $routeParams){
 	var template = sync.$asObject();
 	template.$bindTo($scope, 'template');
 
+	//if the template hasn't loaded in two seconds, redirect to the landing page
+	$timeout(function(){
+		if($scope.template.$value === null){
+			console.log($scope.template + "does not exist, redirecting to home");
+			$location.path('/');
+		}
+	}, 2000)
+
+
+	angular.element($window).bind('resize', function(){
+		
+	});
+
+	Auth.$onAuth(function(authData) {
+	    $scope.authData = authData;
+	});
 
 })
 
