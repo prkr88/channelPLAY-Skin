@@ -13,7 +13,7 @@
 	`gulp`
 5. View in browser at http://localhost:3000
 
-#### For Production (serves the public folder to port 8080):
+#### For Production (deploys to firebase):
 4. install firebase tools: 
 	`sudo npm install -g firebase-tools`
 5. Deploy : 
@@ -25,7 +25,7 @@
 # Troubleshooting Setup (OS X):
 
 ### NPM throws errors / says I don't have permission and to use sudo
-Woah, stop right there. Npm should never require sudo, you've got yourself a permissions issue! 
+Woah, stop right there. Npm should never require sudo for local modules, you've got yourself a permissions issue! 
 Fix this by executing `sudo chown -R $(whoami) ~/.npm` to give npm the right permissions to your system.
 
 ### The Gulp command does not work!
