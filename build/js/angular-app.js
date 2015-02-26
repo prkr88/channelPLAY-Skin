@@ -214,13 +214,17 @@ app.controller('edit-controller', function($scope, $firebase, Auth, $routeParams
 
 })
 
-app.controller('view-controller', function($scope, $firebase, $routeParams){
+app.controller('view-controller', function($scope, $firebase, $routeParams, $window){
 	var id = $routeParams.id;
 	var uid = $routeParams.uid;
 	var ref = new Firebase(firebaseURL).child('users/'+uid+'/templates/'+id);
 	var sync = $firebase(ref);
 	var template = sync.$asObject();
 	template.$bindTo($scope, 'template');
+
+	angular.element($window).bind('resize', function(){
+		
+	});
 
 
 })

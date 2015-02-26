@@ -7,6 +7,8 @@ var browserSync = require ('browser-sync');
 var modRewrite  = require('connect-modrewrite');
 var middleware = require('middleware');
 var streamqueue = require('streamqueue');
+var prefix = require('gulp-autoprefixer');
+
 
 //Compile views into an angular $templateCache module
 //Move them to a temp folder, we'll add them to public later
@@ -53,6 +55,7 @@ gulp.task('build', ['scripts'], function(){
 	            return notify().write(err);
 	        }
 	    }))
+	    .pipe(prefix("last 1 version", "> 1%", "ie 8", "ie 7"))
 		.pipe(gulp.dest('./public/src/css/'))
 		.pipe(notify("Build - Success!"));
 });

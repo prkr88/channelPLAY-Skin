@@ -40,31 +40,25 @@
 			</div>
 		</div>
 		<!-- MAIN NAV -->
-		<nav class="main-navigation">
-			<div class="main-nav-container">
-				<ul>
-					<li ng-repeat=" item in template.navigation.items"><a>{{item}}</a></li>
+		<div class="main-nav-container" id="nav-links">
+				<ul class="navigation-links">
+					<li ng-repeat=" item in template.navigation.items | limitTo: 8" ng-style="{'width': evenWidth}"><a>{{item}}</a></li>
 				</ul>
+				<!-- <div class="social-container">
+					<ul>
+						<li ng-if="template.navigation.social.facebook"><a><i class="fa fa-facebook-official"></i></a></li>
+						<li ng-if="template.navigation.social.twitter"><a><i class="fa fa-twitter"></i></a></li>
+						<li ng-if="template.navigation.social.pintrest"><a><i class="fa fa-pinterest"></i></a></li>
+						<li ng-if="template.navigation.social.instagram"><a><i class="fa fa-instagram"></i></a></li>
+						<li ng-if="template.navigation.social.linkedin"><a><i class="fa fa-linkedin"></i></a></li>
+						<li ng-if="template.navigation.social.reddit"><a><i class="fa fa-reddit"></i></a></li>
+						<li ng-if="template.navigation.social.youtube"><a><i class="fa fa-youtube"></i></a></li>
+					</ul>
+				</div> -->
 			</div>
-			<div class="social-container">
-				<ul>
-					<li ng-if="template.navigation.social.facebook"><a><i class="fa fa-facebook-official"></i></a></li>
-					<li ng-if="template.navigation.social.twitter"><a><i class="fa fa-twitter"></i></a></li>
-					<li ng-if="template.navigation.social.pintrest"><a><i class="fa fa-pinterest"></i></a></li>
-					<li ng-if="template.navigation.social.instagram"><a><i class="fa fa-instagram"></i></a></li>
-					<li ng-if="template.navigation.social.linkedin"><a><i class="fa fa-linkedin"></i></a></li>
-					<li ng-if="template.navigation.social.reddit"><a><i class="fa fa-reddit"></i></a></li>
-					<li ng-if="template.navigation.social.youtube"><a><i class="fa fa-youtube"></i></a></li>
-				</ul>
-			</div>
-		</nav>
-
-
-
-
 	</div>
+</div>
 
-	</div>
 	<div class="section-container border" id="section1">
 		section 1
 	</div>
@@ -81,12 +75,6 @@
 
 
 </div>
-
-<style type="text/css">
-	{{template.customStyles}}
-</style>
-
-
 
 <!-- 
 
