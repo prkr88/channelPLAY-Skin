@@ -10,6 +10,11 @@
 	<hr/>
 </div>
 
+
+<div class="edit-tools" ng-if="template.author == authData.uid" ng-hide="hideTools">
+	<div><p><a ng-href="edit/{{template.$id}}">Show Editor</a><span style="float:right; margin-right: 20px">{{template.name}} | {{authData.password.email}} | <a ng-click="hideTools = true">hide tools</a></span></p></div>
+	
+</div>
 <!-- SKIN STARTS HERE -->
 <div class="skin-container">
 	<div class="section-container" id="hero" ng-style="{'background-image': 'url(' + template.backgroundUrl + ')'}">

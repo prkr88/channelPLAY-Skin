@@ -10,13 +10,17 @@
 
 
 <div class="content-container">
+	<a href="templates"><p>Back to all templates</p></a>
 	<br/><br/>
 	<div>
 	<form class="edit-template-form">
 		<h2>Edit Template</h2>
 		<p>NOTE: All changes apply live, there's no need to save and there's no undo. Currently under development, some fields may not work or be visible.</p> 
 		<br/><hr/><br/>
-		<span style="float:right"><a href="templates"><button>Finished</button></a></span>
+		<span style="float:right">
+			<a ng-href="template/{{authData.uid}}/{{template.$id}}"><button>Preview</button></a>
+		</span>
+			
 
 		<fieldset>
 		<h3>Global Properties</h3>
@@ -64,7 +68,9 @@
 				<input type="checkbox" ng-model="template.navigation.social.youtube"><label> YouTube</label>
 			</div>
 
-			<span style="float:right"><a href="templates"><button>Finished</button></a></span>
+			<span style="float:right">
+				<a ng-href="template/{{authData.uid}}/{{template.$id}}"><button>Preview</button></a>
+			</span>
 		</fieldset>
 		<br/>
 		<hr/>
