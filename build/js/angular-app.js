@@ -124,9 +124,6 @@ app.controller('authController', function($scope, Auth, $timeout, $location, $fi
 			}
 		});
 	};
-	var ref = new Firebase(firebaseURL);
-	console.log(ref.key());
-
 });
 
 
