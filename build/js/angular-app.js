@@ -209,9 +209,6 @@ app.controller('edit-controller', function($scope, Auth, $routeParams, $firebase
 
 })
 
-
-
-
 app.controller('view-controller', function($scope, $firebase, $routeParams, Auth, $location, $timeout){
 	var id = $routeParams.id;
 	var uid = $routeParams.uid;
