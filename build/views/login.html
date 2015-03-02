@@ -1,34 +1,36 @@
 <div class="login-background">
 
-<div   ng-if="!authData" class="login-container" id="loginContainer" ng-style="loading">
-	<div class="header"><h1>channelPLAY</h1>
-	<p>TEMPLATE CREATOR</p>
+	<div ng-if="!authData" class="login-container" id="loginContainer" ng-style="loading">
+		<div><p>ALPHA v1.2.5</p></div>
+		<div class="header"><h1>channelPLAY</h1>
+		<p>TEMPLATE CREATOR</p>
+		</div>
+
+		<div>
+			<form ng-style="authStyle" class="login-form">
+			<div ng-if="loginError" class="error"><p>{{loginError}}</p></div>
+			<input type="email" ng-model="loginFormEmail" placeholder="Email Address">
+			<input type="password" ng-model="loginFormPassword" placeholder="Password">
+			
+			<button  ng-if="!createNewUser" ng-click="login(loginFormEmail, loginFormPassword)">
+			<span ng-if="!authenticating">LOGIN</span>
+			<span ng-if="authenticating">Logging In...</span>
+			</button>
+			<button ng-if="createNewUser" ng-click="createUser(loginFormEmail, loginFormPassword)">
+			<span ng-if="!authenticating">CREATE NEW ACCOUNT</span>
+			<span ng-if="authenticating">Logging In...</span>
+			</button>
+			<p ng-hide="createNewUser" style="text-align:center"><a ng-click="createNewUser = true">or create a new account</a></p>
+			<p ng-show="createNewUser" style="text-align:center"><a ng-click="createNewUser = false">or log in with existing account</a></p>
+			</form>
+		</div>
 	</div>
 
-	<div>
-		<form ng-style="authStyle" class="login-form">
-		<div ng-if="loginError" class="error"><p>{{loginError}}</p></div>
-		<input type="email" ng-model="loginFormEmail" placeholder="Email Address">
-		<input type="password" ng-model="loginFormPassword" placeholder="Password">
-		
-		<button  ng-if="!createNewUser" ng-click="login(loginFormEmail, loginFormPassword)">
-		<span ng-if="!authenticating">LOGIN</span>
-		<span ng-if="authenticating">Logging In...</span>
-		</button>
-		<button ng-if="createNewUser" ng-click="createUser(loginFormEmail, loginFormPassword)">
-		<span ng-if="!authenticating">CREATE NEW ACCOUNT</span>
-		<span ng-if="authenticating">Logging In...</span>
-		</button>
-		<p ng-hide="createNewUser" style="text-align:center"><a ng-click="createNewUser = true">or create a new account</a></p>
-		<p ng-show="createNewUser" style="text-align:center"><a ng-click="createNewUser = false">or log in with existing account</a></p>
-		</form>
+	<div ng-if="authData" class="login-container">
+		<div class="welcome-message">
+		<h1>WELCOME</h1>
+		<p>Loading your templates...</p></div>
 	</div>
-</div>
-
-<div ng-if="authData" class="login-container">
-	<div class="welcome-message">
-	<h1>WELCOME</h1>
-	<p>Loading your templates...</p></div>
-</div>
 
 </div>
+
