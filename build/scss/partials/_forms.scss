@@ -1,12 +1,15 @@
 $form-width: 300px;
 $form-padding: 8px;
+
 .ace_editor { 
 	height: 300px;
 	max-width: 960px;
 	font-family: monospace;
 	}
 
+
 .edit-template-form {
+	animation: fadein 0.8s;
 	margin-bottom: 120px;
 	
 	label {
@@ -56,6 +59,11 @@ $form-padding: 8px;
 	}
 }
 
+
+@keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
 
 
 #social-table {

@@ -1,36 +1,30 @@
-var skin = skin; //load in the schema
-var firebaseURL = "https://brilliant-heat-8775.firebaseio.com"
 
-//Define angular app
+var firebaseURL = "https://brilliant-heat-8775.firebaseio.com"
 var app = angular.module('app', ['templatescache', 'ngRoute','firebase', 'ui.ace'])
 
+
+//RUNS
 app.run(function($rootScope, $location){
 	$rootScope.$on("$routeChangeError", function(event, next, previous, error) {
-    // We can catch the error thrown when the $requireAuth promise is rejected
-    // and redirect the user back to the home page
     if (error === "AUTH_REQUIRED") {
       $location.path("/home");
     }
   });
 });
 
-//configure application routes, 
-//note: this is using gulp-angular-template-cache so only template names are needed
+//ROUTES
 app.config(['$routeProvider', '$locationProvider',
 	function($routeProvider, $locationProvider) {
 		$routeProvider
-			.when('/', {
-				redirectTo: '/login'
-			})
 			
 			.when('/login', {
 				templateUrl: 'login.html',
-				controller: 'auth-controller'
+				controller: 'authController'
 			})
 
 			.when('/templates', {
 				templateUrl: 'templates.html',
-				controller: 'templates-controller',
+				controller: 'templatesController',
 				resolve: {
 			      "currentAuth": ["Auth", function(Auth) {
 			        return Auth.$requireAuth();
@@ -60,72 +54,85 @@ app.config(['$routeProvider', '$locationProvider',
 		$locationProvider.html5Mode(true);
 }]);
 
+//FACTORIES
 app.factory("Auth", ["$firebaseAuth", function($firebaseAuth) {
   var ref = new Firebase(firebaseURL);
-  // console.log("running factory");
   return $firebaseAuth(ref);
 }]);
 
-//FIREBASE APP CONTROLLERS
-app.controller('auth-controller', function($scope, Auth, $location, $timeout){
-    Auth.$onAuth(function(authData) {
+
+//DIRECTIVES
+app.directive('globalNav', function(){
+	return {
+		scope: true,
+		restrict: 'E',
+		templateUrl: 'app-navigation.html',
+		controller: 'authController'
+	};
+});
+
+
+//CONTROLLERS
+app.controller('authController', function($scope, Auth, $timeout, $location, $firebase){
+	Auth.$onAuth(function(authData) {
 	    $scope.authData = authData;
-    	if(authData){
-			$timeout(function(){
-				$location.path('templates')
-			}, 800)
+		if(authData){
+			if($location.$$path === '/login'){
+				$timeout(function(){
+					$location.path('templates')
+				}, 800)
+			}
 		}
 	});
 
-    $scope.login = function(email, password){
-    	var ref = new Firebase(firebaseURL);
-    	$scope.authenticating = true;
-	    ref.authWithPassword({
-		  email    : email,
-		  password : password
-		}, function(error, authData) {
-		  if (error) {
-		  	$scope.authenticating = false;
-		  	$scope.loginError = error.message;
-		  	$scope.$apply();
-		    console.log("Login Failed!", error.message);
-		  } else {
-		  	$scope.loading = {'opacity': 0};
-		    console.log("Authenticated successfully");
-		    $timeout(function(){
-		    	$location.path('templates');
-		    },2000);
-		  }
-		});
-	}
-
-
-	$scope.createUser = function(email, password){
-		var ref = new Firebase(firebaseURL);
-		$scope.authenticating = true;
-		ref.createUser({
-			email    : email,
-		  	password : password
-		}, function(error, userData){
-			if(error){
-				$scope.authenticating = false;
-			  	$scope.loginError = error.message;
-			  	$scope.$apply();
-			}
-			else {
-				console.log("Created new user "+ userData.uid);
-				$scope.login(email, password);
-			}
-		});
-	};
-
 	$scope.logout = function(){
 		Auth.$unauth();
+		$timeout(function(){
+			$location.path('/');
+		}, 300);
 	};
 
-})
+	$scope.login = function(email, password){
+		$scope.authenticating = true;
+		Auth.$authWithPassword({email: email, password: password}).then(function(err, authData){
+			$scope.loading = {'opacity': 0};
+			$timeout(function(){
+		    	$location.path('templates');
+		    },2000);
+		}).catch(function(err) {
+      		console.error("Authentication failed: ", err);
+      		$scope.authenticating = false;
+		  	$scope.$apply();
+	    });
+	}
 
-app.controller('templates-controller', function($scope, Auth, $firebase, $location, $timeout){
+	$scope.createUser = function(e, p){
+		$scope.authenticating = true;
+		var ref = new Firebase(firebaseURL);
+		var email = e;
+		var password = p;
+		ref.createUser({email : email, password : password}, function(err, userData){
+			if(err){
+				$scope.authenticating = false;
+			  	$scope.loginError = err.message;
+			  	$scope.$apply();	
+			}
+			else {
+				$scope.loading = {'opacity': 0};
+				console.log("Created new user "+ userData.uid);
+				$scope.login(email, password)
+			}
+		});
+	};
+	var ref = new Firebase(firebaseURL);
+	console.log(ref.key());
+
+});
+
+
+
+
+app.controller('templatesController', function($scope, Auth, $location, $firebase, $timeout){
 	$scope.templates = [];
 
     Auth.$onAuth(function(authData) {
@@ -160,13 +167,6 @@ app.controller('templates-controller', function($scope, Auth, $firebase, $locati
 	};
 
 
-   	$scope.logout = function(){
-		Auth.$unauth();
-		$timeout(function(){
-			$location.path('/');
-		}, 300);
-	};
-
 	$scope.createNewTemplate = function(){
 		$scope.creatingTemplate = true;
 		$scope.template.author = $scope.authData.uid;
@@ -187,12 +187,11 @@ app.controller('templates-controller', function($scope, Auth, $firebase, $locati
 	};
 })
 
-app.controller('edit-controller', function($scope, $firebase, Auth, $routeParams, $location, $timeout){
+app.controller('edit-controller', function($scope, Auth, $routeParams, $firebase, $location, $timeout){
 	Auth.$onAuth(function(authData) {
 	    $scope.authData = authData;
 	    if(authData){
 	    	loadTemplate(authData.uid);
-	    	// $scope.template.author = $scope.authData.uid;
 	    }
 	});
 
@@ -208,25 +207,25 @@ app.controller('edit-controller', function($scope, $firebase, Auth, $routeParams
 	$scope.$watch('template.navigation.itemString', function(newVal, oldVal){
 		if(newVal){
 			$scope.template.navigation.items = newVal.split(", ");
-			}
+		}
 	});
-
-	$scope.logout = function(){
-		Auth.$unauth();
-		$timeout(function(){
-			$location.path('/');
-		}, 300);
-	};
 
 })
 
-app.controller('view-controller', function($scope, $firebase, $routeParams, $window, Auth, $location, $timeout){
+
+
+
+app.controller('view-controller', function($scope, $firebase, $routeParams, Auth, $location, $timeout){
 	var id = $routeParams.id;
 	var uid = $routeParams.uid;
 	var ref = new Firebase(firebaseURL).child('users/'+uid+'/templates/'+id);
 	var sync = $firebase(ref);
+
 	var template = sync.$asObject();
 	template.$bindTo($scope, 'template');
+
+
+
 
 	//if the template hasn't loaded in two seconds, redirect to the landing page
 	$timeout(function(){
@@ -235,11 +234,6 @@ app.controller('view-controller', function($scope, $firebase, $routeParams, $win
 			$location.path('/');
 		}
 	}, 2000)
-
-
-	angular.element($window).bind('resize', function(){
-		
-	});
 
 	Auth.$onAuth(function(authData) {
 	    $scope.authData = authData;

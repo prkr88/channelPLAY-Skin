@@ -72,9 +72,31 @@
 				<a ng-href="template/{{authData.uid}}/{{template.$id}}"><button>Preview</button></a>
 			</span>
 		</fieldset>
-		<br/>
 		<hr/>
+		</fieldset>
+		<fieldset>
+			<h3>Hero</h3>
+			<br/>
 
+				<input type="radio" ng-model="template.hero.type" name="heroType" value="singleVideo"> Single Video <br/>
+				<input type="radio" ng-model="template.hero.type" name="heroType" value="carousel"> Carousel <br/>
+				<input type="radio" ng-model="template.hero.type" name="heroType" value=""> None
+
+			<br/><br/>
+			<div ng-if="template.hero.type === 'singleVideo'">
+			<h4>Single Video Options</h4><br/>
+				<label>Video Title</label>
+				<input type="text" ng-model="template.hero.singleVideo.title">
+			</div>
+			<div ng-if="template.hero.type === 'carousel'">
+			<h4>Carousel Options</h4><br/>
+				<label>Video Title</label>
+				<input type="text" ng-model="template.hero.carousel.title">
+			</div>
+
+			<br/>
+			<hr/>
+		</fieldset>
 		<fieldset>
 			<h3>Custom CSS</h3>
 			<br/>
@@ -102,3 +124,5 @@
 	</form>
 	</div>
 </div>
+
+<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>

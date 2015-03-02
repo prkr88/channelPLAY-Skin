@@ -1,15 +1,5 @@
-<div class="content-container" ng-show="infoHidden">
-	<br/>
-	<h1>Template Viewer</h1><br/>
-	<p>All the data uses three-way binding, so as you edit the template it will update live on any other machine!<br/>
-	This could be used in a workshop to make live adjustments to the content and branding from a tablet while the skin is presented on a TV.
-	</p>
-	<br/><p>Try it out by opening the edit panel on another device and watch the changes apply in real time. </p>
-	<button ng-click"infoHidden = true">Hide Intro</button>
-	<br/>
-	<hr/>
-</div>
 
+<!--  <global-nav></global-nav> -->
 
 <div class="edit-tools" ng-if="template.author == authData.uid" ng-hide="hideTools">
 	<div><p><a ng-href="edit/{{template.$id}}">Show Editor</a><span style="float:right; margin-right: 20px">{{template.name}} | {{authData.password.email}} | <a ng-click="hideTools = true">hide tools</a></span></p></div>
@@ -62,6 +52,13 @@
 				</div>
 			</div>
 	</div>
+
+	<div class="carousel-container" ng-if="template.hero.type == 'carousel'">
+		<h2>Carousel</h2>
+	</div>
+	<div class="carousel-container" ng-if="template.hero.type == 'singleVideo'">
+		<h2>Single Video</h2>
+	</div>
 </div>
 
 	<div class="section-container border" id="section1">
@@ -78,17 +75,8 @@
 	</footer>
 
 </div>
+
+<!-- INJECT CUSTOM STYLES HERE -->
 <style type="text/css">
 {{template.customStyles}}
 </style>
-<!-- 
-
-<hr/>
-<br/>
-<h2>{{template.name}}</h2>
-<h4>{{template.client}}</h4>
-<p>{{template.description}}</p>
-<br/>
-<img ng-src="{{template.hero.imageUrl}}" width="500" height="auto">
-
-</div> -->
